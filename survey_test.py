@@ -1,10 +1,15 @@
 import streamlit as st
 import time
+from streamlit_gsheets import GSheetsConnection
+import pandas as pd
+from collections import defaultdict
+
+
 
 ######################## Popup and submission handling
 #dont allow these widgets to reset between sessions
-if "active_student" in st.session_state:
-	st.session_state.active_student = st.session_state.active_student
+if "active_user" in st.session_state:
+	st.session_state.active_user = st.session_state.active_user
 
 if "active_section" in st.session_state:
 	st.session_state.active_section = st.session_state.active_section
@@ -12,7 +17,7 @@ if "active_section" in st.session_state:
 #submission dialog popup
 @st.dialog("Feedback submitted!")
 def show_review_prompt():
-	st.success(f"Thanks for your feedback {st.session_state['active_student'].split(" ")[0]}!")
+	st.success(f"Thanks for your feedback {st.session_state['active_user'].split(" ")[0]}!")
 	st.write("Would you like to review another group? If so, please select ''Review Again' below. Otherwise, you may now close the survey.")
 	if st.button("Review Again"):
 		st.session_state['review_more_dialog'] = "Yes"
@@ -65,33 +70,34 @@ if st.session_state.dialog_completed and st.session_state.get("review_more_dialo
 st.title("ME4842 Proposal Presentation Feedback")
 st.header("Student Identification")
 
-st.write(f'the current user is {st.user.email}')
-
 # Student dictionary, orgaizned by section and group. GOAL: CREATE VIA CANVAS
-students_by_section_group = {
-	"303": {
-		"Group A": ["Alice Johnson", "Ben Smith", "Carla Diaz", "Daniel Wong"],
-		"Group B": ["Eva Thompson", "Frank Li", "Grace Patel", "Henry Brooks"]
-	},
-	"304": {
-		"Group A": ["Iris Kim", "Jake Turner", "Katie Lee", "Leo White"],
-		"Group B": ["Maya Green", "Nathan Hall", "Olivia Jones", "Paul Singh"]
-	},
-	"305": {
-		"Group A": ["Quinn Wright", "Riley Chen", "Sophia Adams", "Tyler Cook"],
-		"Group B": ["Uma Patel", "Victor Lin", "Wendy Zhang", "Xavier Lee"]
-	}
-}
+# Create a nested defaultdict to build the structure
+nested = defaultdict(lambda: defaultdict(list))
+
+
+# Read and parse each entry from the TOML secrets list
+for entry in st.secrets["class_list"]["students"]:
+    section, group, name = entry.split(",", 2)
+    section = section.strip()
+    group = group.strip()
+    name = name.strip()
+    nested[section][group].append(name)
+
+# Convert defaultdict to regular dict
+students_by_section_group = {s: dict(groups) for s, groups in nested.items()}
 
 students_by_section = {
 	section: [student for group in groups.values() for student in group]
 	for section, groups in students_by_section_group.items()
 }
 
+ind_scores = []
+group_scores = []
+
 
 section_dropdown = st.selectbox("Select your section", options=["Click to Select"] + list(students_by_section.keys()),key='active_section')
 if st.session_state['active_section'] != 'Click to Select':
-	student_name_dropdown = st.selectbox("Select your name", options=["Click to Select"] + list(students_by_section[st.session_state['active_section']]),key='active_student')
+	student_name_dropdown = st.selectbox("Select your name", options=["Click to Select"] + list(students_by_section[st.session_state['active_section']]),key='active_user')
 
 #Create questions for review, first select group to review
 st.header("Presentation Review")
@@ -100,7 +106,7 @@ if st.session_state['active_section'] != 'Click to Select':
 	st.write(st.session_state['active_group'])
 #create grid for students to track presentation order
 # Only proceed with questions if student group,section, and name have been selected, make sure default is not selected
-if st.session_state['active_section'] != "Click to Select" and st.session_state['active_student'] != "Click to Select" and st.session_state['active_group'] != "Click to Select":
+if st.session_state['active_section'] != "Click to Select" and st.session_state['active_user'] != "Click to Select" and st.session_state['active_group'] != "Click to Select":
 	st.markdown("Use this to visually track who is presenting in which order.")
 
 	# Use actual students from selected section and group
@@ -144,6 +150,24 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 		enthusiasm = st.radio(f"**Enthusiasm**", individual_responses, key=f"ind_enthusiasm_{student}",index=0)
 		overall = st.radio(f"**Speaking**", individual_responses, key=f"ind_speaking_{student}",index=0)
 		comments = st.text_area(f"**Individual feedback for {student} (optional):**", key=f"ind_feedback_{student}")
+			
+		ind_feedback_string = ",".join([
+			st.session_state.active_user,
+			student,
+			st.session_state.active_group,
+			dress_code,
+			audience_engagement,
+			body_language,
+			enthusiasm,
+			overall,
+			comments
+			])
+		
+		ind_scores.append({
+			"Survey_ID": "Prop_Ind",  # or your preferred ID
+			"Feedback": ind_feedback_string
+		})
+
 
 	st.subheader(f"**Score {group}:**")
 	group_comments = st.text_area(f"**Provide written overall feedback and presentation comments for {group} here (optional):**", key=f"group_feedback_{group}")
@@ -152,9 +176,44 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 	group_completeness = st.number_input(f"**Overall completeness of proposal.** Did {group} leave out any important information? Did they propose the details of their experimental setup (i.e. specific instrumentation)?",key=f"group_completeness_{group}",min_value=0.0,max_value=10.0,step=0.1, format="%.1f")
 	group_presentation_quality = st.number_input(f"**Overall presentation quality.** Did {group} effecitvley communicate their ideas? Did they speak clearly and use well made slides with good visual aids?",key=f"group_presentation_quality_{group}",min_value=0.0,max_value=10.0,step=0.1, format="%.1f")
 	group_answer_questions = st.number_input(f"**Overall ability to answer questions.** Did {group} work well together to answer the audience and reviewer questions?",key=f"group_answer_questions_{group}",min_value=0.0,max_value=10.0,step=0.1, format="%.1f")
+
+	group_feedback_string = ",".join([
+		st.session_state.active_user,
+		st.session_state.active_group,
+		str(group_comments),
+		str(group_technical),
+		str(group_efficacy),
+		str(group_completeness),
+		str(group_presentation_quality),
+		str(group_answer_questions)
+		])
 	
+	group_scores = {
+		"Survey_ID": "Prop_Group",  # or your preferred ID
+		"Feedback": group_feedback_string
+	}
+	group_df = pd.DataFrame([group_scores])
+
+
 	if st.button("Submit Feedback"):
-		
+		# Initialize connection
+		conn = st.connection("gsheets", type=GSheetsConnection)
+		with st.spinner("Uploading Data...", show_time=True):
+			sh = conn._instance._open_spreadsheet()
+			worksheets = sh.worksheets()
+			available_sheets = []
+			for worksheet in worksheets:
+				available_sheets.append(worksheet.title)
+			if st.session_state.active_user in available_sheets:
+				prev_data = conn.read(worksheet=st.session_state.active_user, ttl=0)
+				ind_df = pd.DataFrame(ind_scores)
+				group_df = pd.DataFrame([group_scores])
+				conn.update(worksheet=st.session_state.active_user,data=pd.concat([prev_data,ind_df,group_df]))
+			else:
+				ind_df = pd.DataFrame(ind_scores)
+				group_df = pd.DataFrame([group_scores])
+				conn.create(worksheet=st.session_state.active_user, data=pd.concat([ind_df,group_df]))
+			#conn.update(worksheet=f"{st.session_state.active_user}", data=df)
 		show_review_prompt()
 
 
