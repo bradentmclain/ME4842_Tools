@@ -65,7 +65,7 @@ if st.session_state.dialog_completed and st.session_state.get("review_more_dialo
 st.title("ME4842 Proposal Presentation Feedback")
 st.header("Student Identification")
 
-
+st.write(f'the current user is {st.user.email}')
 
 # Student dictionary, orgaizned by section and group. GOAL: CREATE VIA CANVAS
 students_by_section_group = {
