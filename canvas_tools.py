@@ -16,9 +16,9 @@ class CanvasTool:
 		canvas = Canvas(API_URL, API_KEY)
 		course = canvas.get_course(COURSE_ID)
 
-		self.users = course.get_users()
 		group_categories = course.get_group_categories()
 		self.groups = group_categories[0].get_groups()
+		self.teachers = course.get_users(enrollment_type=['teacher'])
 
 		self.sections = course.get_sections()
 	
@@ -41,6 +41,7 @@ class CanvasTool:
 			for member in members:
 				self.student_data[member.name][1]= group.name
 
+
 	def print_survey_config(self):
 		#use this function to create the secrets file for survey configuration
 		print(f'Paste this into your secrets.toml file:\n')
@@ -57,9 +58,9 @@ class CanvasTool:
 
 
 
-
-
 if __name__ == "__main__":
 	mycanvas = CanvasTool()
 	mycanvas.find_student_data()
 	mycanvas.print_survey_config()
+	for teach in mycanvas.teachers:
+		print(teach.name)
