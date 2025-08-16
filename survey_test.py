@@ -65,6 +65,7 @@ if st.session_state.dialog_completed and st.session_state.get("review_more_dialo
 st.title("ME4842 Proposal Presentation Feedback")
 st.header("Student Identification")
 
+
 ind_scores = []
 group_scores = []
 
@@ -87,6 +88,7 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 
 	students = students_by_section_group[st.session_state['active_section']][group]
 	orders = [1, 2, 3, 4]
+	
 
 	# Initialize selection state for each student row
 	for student in students:
@@ -139,7 +141,7 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 			])
 		
 		ind_scores.append({
-			"Survey_ID": "Prop_Ind",
+			"Survey_ID": "Proposal_Individual",
 			"Feedback": ind_feedback_string
 		})
 
@@ -165,7 +167,7 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 		])
 	
 	group_scores = {
-		"Survey_ID": "Prop_Group",  # or your preferred ID
+		"Survey_ID": "Proposal_Group",  # or your preferred ID
 		"Feedback": group_feedback_string
 	}
 	group_df = pd.DataFrame([group_scores])
