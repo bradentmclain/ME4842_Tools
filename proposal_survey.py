@@ -3,6 +3,7 @@ import time
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 from collections import defaultdict
+import random
 
 
 #these should persist between sessions
@@ -68,6 +69,7 @@ st.header("Student Identification")
 
 ind_scores = []
 group_scores = []
+weight = random.choice([1,2])
 
 #user identification, must be sequential
 section_dropdown = st.selectbox("Select your section", options=["Click to Select"] + list(students_by_section.keys()),key='active_section')
@@ -130,8 +132,8 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 		#store responses in string to save as df
 		ind_feedback_string = "$*".join([
 			st.session_state.active_user,
+			str(weight),
 			student,
-			st.session_state.active_group,
 			dress_code,
 			audience_engagement,
 			body_language,
@@ -142,7 +144,7 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 		
 		ind_scores.append({
 			"Survey_ID": "Proposal_Individual",
-			"Feedback": ind_feedback_string
+			"Data": ind_feedback_string
 		})
 
 	#group survey question
@@ -157,6 +159,8 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 	#store responses in string to save as df
 	group_feedback_string = "$*".join([
 		st.session_state.active_user,
+		str(weight),
+		','.join(students),
 		st.session_state.active_group,
 		str(group_comments),
 		str(group_technical),
@@ -168,7 +172,7 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 	
 	group_scores = {
 		"Survey_ID": "Proposal_Group",  # or your preferred ID
-		"Feedback": group_feedback_string
+		"Data": group_feedback_string
 	}
 	group_df = pd.DataFrame([group_scores])
 
