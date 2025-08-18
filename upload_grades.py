@@ -14,6 +14,7 @@ mycanvas.find_student_data()
 #student data in form {student:[id,section,group]}
 course_list = mycanvas.student_data
 
+#grade submissions in form {student_id:(grade,comments)}
 grades = {}
 
 for student in proposal_grades.keys():
@@ -26,5 +27,7 @@ for student in proposal_grades.keys():
 
 assignment_id = 3246434
 start = time.time()
+
 mycanvas.upload_bulk_grades(assignment_id,grades)
-print(f'grade upload took {time.time-start} seconds')
+
+print(f'grade upload took {time.time()-start} seconds')

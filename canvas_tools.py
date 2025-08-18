@@ -86,8 +86,6 @@ class CanvasTool:
 		print(f"Uploaded {len(grades)} grades for assignment {assignment_id}")
 
 
-
-
 if __name__ == "__main__":
 	mycanvas = CanvasTool()
 	mycanvas.find_student_data()
