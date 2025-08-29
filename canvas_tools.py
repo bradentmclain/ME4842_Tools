@@ -59,6 +59,15 @@ class CanvasTool:
 
 	def print_student_emails(self):
 		#use this function to print student emails
+		for section in self.sections:
+			section_name = section.name
+			enrollments = section.get_enrollments(type=["StudentEnrollment"])
+			#list each student in each section add them to main list
+			for enrollment in enrollments:
+				user = enrollment.user
+				student_email = user['login_id']
+				print(f'{student_email}@umsystem.edu')
+				print(f'{student_email}@mst.edu')
 		pass
 
 	def upload_single_grade(self, assignment_id: int,student_id: int, score: float, comment: str = ""):
@@ -89,11 +98,14 @@ class CanvasTool:
 if __name__ == "__main__":
 	mycanvas = CanvasTool()
 	mycanvas.find_student_data()
+	#mycanvas.print_student_emails()
+	mycanvas.print_survey_config()
+
 	#print(mycanvas.student_data)
-	print('uploading assignment')
+	# print('uploading assignment')
 	
-	grades = {
-		61507:(20,'nice job'),
-		62486:(30,'great work'),
-	}
-	mycanvas.upload_bulk_grades(3246434,grades)
+	# grades = {
+	# 	61507:(20,'nice job'),
+	# 	62486:(30,'great work'),
+	# }
+	# mycanvas.upload_bulk_grades(3246434,grades)
