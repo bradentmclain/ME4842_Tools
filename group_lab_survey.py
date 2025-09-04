@@ -112,6 +112,7 @@ if st.session_state['active_section'] != 'Click to Select' and st.session_state[
 	if st.button("Submit", disabled=not allow_submit):
 		feedback_string = "$*".join([
 		str(selected_names),
+		str(st.session_state['active_section']),
 		str(selected_labs)
 		])
 	

@@ -41,6 +41,19 @@ class Grader:
 				else:
 					self.student_responsebook[student_name].append([assignment_id,data])
 
+
+
+	def create_groups(self,):
+		groups = 1
+		for student_name, responses in self.student_responsebook.items():
+			for assignment_id, data in responses:
+				if assignment_id == 'Group_Lab_Selection':
+					pass
+
+		
+
+	def grade_proposal(self,):
+
 		for student_name, responses in self.student_responsebook.items():
 			for assignment_id, data in responses:
 				name = data[2]
@@ -58,7 +71,6 @@ class Grader:
 					else:
 						self.student_gradebook[name].append([assignment_id, data])
 
-	def grade_proposal(self,):
 		individual_questions = ['dress_code', 'audience_engagement', 'body_language','enthusiasm','overall']
 		group_questions = ['technical', 'efficacy', 'completeness','presentation_quality','answer_questions']
 		individual_response_options = ['Substandard', 'Poor', 'Acceptable', 'Good', 'Excellent']
@@ -158,10 +170,10 @@ class Grader:
 if __name__ == "__main__":
 	grad = Grader()
 	grad.organize_responses()
-	proposal_grades = grad.grade_proposal()
+	grad.create_groups()
 
-	for grade in proposal_grades:
-		print(grade[2])
+	# for grade in proposal_grades:
+	# 	print(grade[2])
 	#for student in grad.student_gradebook.keys():
 		# print(student,grad.student_gradebook[student])
 		# print('\n')
