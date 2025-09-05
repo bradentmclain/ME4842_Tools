@@ -34,7 +34,7 @@ class Grader:
 			for response in responses[1:]: 
 				data = response[1].split('$*')
 				assignment_id = response[0]
-				student_name = data[0]
+				student_name = str(sheet.title)
 				
 				if student_name not in self.student_responsebook.keys():
 					self.student_responsebook[student_name] = [[assignment_id,data]]

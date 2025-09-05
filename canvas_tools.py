@@ -66,8 +66,7 @@ class CanvasTool:
 			for enrollment in enrollments:
 				user = enrollment.user
 				student_email = user['login_id']
-				print(f'{student_email}@umsystem.edu')
-				print(f'{student_email}@mst.edu')
+				print(f'{student_email}@umsystem.edu,')
 		pass
 
 	def upload_single_grade(self, assignment_id: int,student_id: int, score: float, comment: str = ""):
@@ -98,8 +97,8 @@ class CanvasTool:
 if __name__ == "__main__":
 	mycanvas = CanvasTool()
 	mycanvas.find_student_data()
-	#mycanvas.print_student_emails()
-	mycanvas.print_survey_config()
+	mycanvas.print_student_emails()
+	#mycanvas.print_survey_config()
 
 	#print(mycanvas.student_data)
 	# print('uploading assignment')
