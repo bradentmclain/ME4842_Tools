@@ -67,7 +67,7 @@ active_user = st.selectbox("Please Select Your Name", options=['Click to Select'
 selected_names = []
 if st.session_state['active_section'] != 'Click to Select' and st.session_state['active_user'] != 'Click to Select':
 	st.header("Group Identification")
-	number_group_members = st.number_input(f"How many students will be in your group?",min_value=3,max_value=5,step=1,key='number_group_members')
+	number_group_members = st.number_input(f"How many students will be in your group?",min_value=2,max_value=5,step=1,key='number_group_members')
 
 	for i in range(st.session_state['number_group_members']):
 		if i == 0:
