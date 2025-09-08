@@ -86,7 +86,8 @@ class Grader:
         secrets = toml.load(".streamlit/secrets.toml")
         students = secrets['class_list']['students']
     
-        # (Section, Name)
+        # (Section, Name, Group)
+
         students: list[tuple[str, str]] = [(info.split(',')[0], info.split(',')[-1]) for info in students]
         not_in_groups = []
         in_multiple_groups = []
@@ -111,30 +112,34 @@ class Grader:
 
         self.export_groups(student_groups, not_in_groups, in_multiple_groups)
 
-        # Run picker
-        shutil.rmtree("assignments", ignore_errors=True)
-        os.mkdir("assignments")
 
-        for section in student_groups.keys():
-            group_data = []
-            for group in student_groups[section].keys():
-                group_data.append({
-                    "Group": group,
-                    "Electives": pref_responses[group]
-                })
-
-            groups, costs, ranks = st.process_input_and_build_costs(group_data, ['Acoustics', 'Pump', 'Tuned Mass Damper', 'Dynamic Balancing', 'Piezoelectric'], unlisted_penalty=5, seed=1)
-
-            # if len(groups) > 5:
-            #     raise SystemExit(f"Infeasible: {len(groups)} groups but only 5 one-station electives per week. Split the section or add capacity.")
-            result, status = st.solve_ilp(groups, costs, T=2)
-            if status != "ok":
-                result, status = st.solve_greedy(groups, costs, T=2)
-
-            st.write_output(f"assignments/{section}.xlsx", result, groups, costs, ranks, None, 5, T=2)
-            print(json.dumps({"status": status, "total_cost": result["total_cost"], "groups": len(groups)}))
         
     
+    # def assign_labs(self,):
+    #         # Run picker
+    #     shutil.rmtree("assignments", ignore_errors=True)
+    #     os.mkdir("assignments")
+
+    #     for section in student_groups.keys():
+    #         group_data = []
+    #         for group in student_groups[section].keys():
+    #             group_data.append({
+    #                 "Group": group,
+    #                 "Electives": pref_responses[group]
+    #             })
+
+    #         groups, costs, ranks = st.process_input_and_build_costs(group_data, ['Acoustics', 'Pump', 'Tuned Mass Damper', 'Dynamic Balancing', 'Piezoelectric'], unlisted_penalty=5, seed=1)
+
+    #         # if len(groups) > 5:
+    #         #     raise SystemExit(f"Infeasible: {len(groups)} groups but only 5 one-station electives per week. Split the section or add capacity.")
+    #         result, status = st.solve_ilp(groups, costs, T=2)
+    #         if status != "ok":
+    #             result, status = st.solve_greedy(groups, costs, T=2)
+
+    #         st.write_output(f"assignments/{section}.xlsx", result, groups, costs, ranks, None, 5, T=2)
+    #         print(json.dumps({"status": status, "total_cost": result["total_cost"], "groups": len(groups)}))
+
+
     def export_groups(self, student_groups: dict[str, dict[str, list[str]]], students_not_in_groups: list[tuple[str, str]], students_in_multiple_groups: list[str]):
         with open("groups.yml", "w") as f:
 
@@ -145,7 +150,6 @@ class Grader:
             
             # Sort by section.
             groups = sorted(groups, key=lambda k: list(k.keys())[0][:-1])
-
             header = {
                 "Students in Multiple Groups": [{student[0]: student[1]} for student in students_in_multiple_groups],
                 "Students not in Group": [{student[0]: student[1]} for student in students_not_in_groups]
@@ -154,7 +158,7 @@ class Grader:
             data = {
                 "Groups": groups
             }
-
+            f.write(yaml.dump({"Information":"Please resolve all conflicts before uploading to Canvas. Do not delete conflict notes."}))
             f.write(yaml.dump(header))
             f.write(yaml.dump(data))
         

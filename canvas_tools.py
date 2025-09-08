@@ -2,6 +2,7 @@
 from canvasapi import Canvas
 import tomllib 
 from collections import defaultdict
+import yaml
 
 class CanvasTool:
 	# Positions of points, rects, displacements
@@ -18,11 +19,13 @@ class CanvasTool:
 		canvas = Canvas(API_URL, API_KEY)
 		self.course = canvas.get_course(COURSE_ID)
 
-		group_categories = self.course.get_group_categories()
-		if group_categories:
-			self.groups = group_categories[0].get_groups()
-		else:
-			self.groups = []
+		self.group_categories = self.course.get_group_categories()
+		for category in self.group_categories:
+			if category.name == 'Project Groups':
+				self.project_groups_category_id = category.id
+				self.project_group_category = category
+
+		self.groups = self.project_group_category.get_groups()
 		self.teachers = self.course.get_users(enrollment_type=['teacher'])
 
 		self.sections = self.course.get_sections()
@@ -92,12 +95,64 @@ class CanvasTool:
 			grade_data=grade_data
 		)
 		print(f"Uploaded {len(grades)} grades for assignment {assignment_id}")
+	
+	def upload_groups(self):
+		#add more error checking
+		error = False
+		with open("groups.yml", "r") as f:
+			data = yaml.safe_load(f)
 
+		students = []
+		for groups in data['Groups']:
+			for name, members in groups.items():
+				for student in members:
+					students.append(student)
+		
+		for ungrouped in data['Students not in Group']:
+			for section, ungrouped_student in ungrouped.items():
+				if ungrouped_student not in students:
+					print(f'{ungrouped_student} has not been added to a group. Please resolve in groups.yml')
+					error = True
+		
+		for double_booked in data['Students in Multiple Groups']:
+			for section, double_booked_student in double_booked.items():
+				if students.count(double_booked_student) > 1:
+					print(f'{double_booked_student} is in more than one group. Please resolve in groups.yml')
+					error = True
+
+		if error == True:
+			return
+		
+		existing_canvas_group_names = []
+		for g in self.groups:
+			existing_canvas_group_names.append(g.name)
+
+		#create necessary groups
+		for groups in data['Groups']:
+			for group_name, members in groups.items():
+				if group_name not in existing_canvas_group_names:
+					self.project_group_category.create_group(name=group_name)
+
+		#add students to respective groups
+		for groups in data['Groups']:
+			for group_name, members in groups.items():
+				groups = list(self.project_group_category.get_groups())
+				canvas_group = next((g for g in groups if g.name == group_name), None)
+				if canvas_group != 'None':
+					for student in members:
+						uid = self.student_data[student][0]
+						print(f'adding student {student} to group {canvas_group.name}')
+						canvas_group.create_membership(user=uid)
+						#print(f'gonna try to add {student} to {canvas_group.name}')
+						
 
 if __name__ == "__main__":
 	mycanvas = CanvasTool()
 	mycanvas.find_student_data()
-	mycanvas.print_student_emails()
+
+	mycanvas.upload_groups()
+	#print(mycanvas.student_data)
+	#mycanvas.print_student_emails()
 	#mycanvas.print_survey_config()
 
 	#print(mycanvas.student_data)
