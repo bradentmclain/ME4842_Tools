@@ -1,4 +1,5 @@
-Information: Please resolve all conflicts before uploading to Canvas. Do not delete conflict notes.
+Information: Please resolve all conflicts before uploading to Canvas. Do not delete
+  conflict notes.
 Students in Multiple Groups:
 - '302': Tucker Cudmore
 - '302': Lauren Vitale
@@ -7,142 +8,194 @@ Students in Multiple Groups:
 Students not in Group:
 - '305': Maddisyn Reed
 - '313': Hayden Cook
-- '313': Tohajie Raet
 - '313': Christian Rosales
 - '313': Ethan Watson
 Groups:
 - 301A:
-  - Clairese Kluba
-  - Benjamin Lampe
-  - Cavitt Bruhn
-  - Dominic Ponciroli
+    Group Members:
+    - Clairese Kluba
+    - Benjamin Lampe
+    - Cavitt Bruhn
+    - Dominic Ponciroli
+    Labs: Acoustics,Pump,Tuned Mass Damper,Dynamic Balancing,Piezoelectric
 - 301B:
-  - Tyson Pilla
-  - Carter Allen
-  - Gunnar Rutherford
-  - Aidan Lesnik
+    Group Members:
+    - Tyson Pilla
+    - Carter Allen
+    - Gunnar Rutherford
+    - Aidan Lesnik
+    Labs: Dynamic Balancing,Tuned Mass Damper,Acoustics,Piezoelectric,Pump
 - 301C:
-  - Anna Finley
-  - Madison Vieth
-  - Henry Wilson
+    Group Members:
+    - Anna Finley
+    - Madison Vieth
+    - Henry Wilson
+    Labs: Pump,Acoustics,Tuned Mass Damper,Dynamic Balancing,Piezoelectric
 - 301D:
-  - Rebekah Settles
-  - Shiane Taylor
-  - Griffin Mills
-  - Micah Asbill
+    Group Members:
+    - Rebekah Settles
+    - Shiane Taylor
+    - Griffin Mills
+    - Micah Asbill
+    Labs: Acoustics,Dynamic Balancing,Tuned Mass Damper,Piezoelectric,Pump
 - 302A:
-  - David Frasca
-  - Ryan Clapp
-  - Erik Hanson
-  - Joseph Day
+    Group Members:
+    - David Frasca
+    - Ryan Clapp
+    - Erik Hanson
+    - Joseph Day
+    Labs: Acoustics,Tuned Mass Damper,Piezoelectric,Dynamic Balancing,Pump
 - 302B:
-  - Tucker Cudmore
-  - Lauren Vitale
-  - Paulvin Horton
-  - Jacob Steward
+    Group Members:
+    - Paulvin Horton
+    - Tucker Cudmore
+    - Lauren Vitale
+    - Jacob Steward
+    Labs: Dynamic Balancing,Acoustics,Piezoelectric,Tuned Mass Damper,Pump
 - 302C:
-  - Leland Shaub
-  - Ethan Haile
-  - Mason Phillips
-  - John Niebrugge
+    Group Members:
+    - Leland Shaub
+    - Ethan Haile
+    - Mason Phillips
+    - John Niebrugge
+    Labs: Dynamic Balancing,Pump,Tuned Mass Damper,Acoustics,Piezoelectric
 - 302D:
-  - Alonzo Edmond
-  - Levi Opp
-  - Nequan Johnson
+    Group Members:
+    - Alonzo Edmond
+    - Levi Opp
+    - Nequan Johnson
+    Labs: Dynamic Balancing,Tuned Mass Damper,Acoustics,Piezoelectric,Pump
 - 303A:
-  - Joshua Pesek
-  - Austin Boyd
-  - Matthew Stornello
+    Group Members:
+    - Joshua Pesek
+    - Austin Boyd
+    - Matthew Stornello
+    Labs: Dynamic Balancing,Tuned Mass Damper,Acoustics,Pump,Piezoelectric
 - 303B:
-  - Henry Witte
-  - Eric Lindsay
-  - Andrew Dutton
-  - Marcus Kjar
+    Group Members:
+    - Henry Witte
+    - Eric Lindsay
+    - Andrew Dutton
+    - Marcus Kjar
+    Labs: Pump,Dynamic Balancing,Tuned Mass Damper,Acoustics,Piezoelectric
 - 303C:
-  - Lucia Rogers
-  - Klajdi Hysenaj
-  - Ryan Schrick
-  - Josiah Bond
+    Group Members:
+    - Lucia Rogers
+    - Klajdi Hysenaj
+    - Ryan Schrick
+    - Josiah Bond
+    Labs: Acoustics,Pump,Piezoelectric,Tuned Mass Damper,Dynamic Balancing
 - 303D:
-  - William Rix
-  - Zachary Maxwell
-  - Ethan Spirer
-  - Seth Nolte
+    Group Members:
+    - William Rix
+    - Zachary Maxwell
+    - Ethan Spirer
+    - Seth Nolte
+    Labs: Acoustics,Dynamic Balancing,Pump,Tuned Mass Damper,Piezoelectric
 - 305A:
-  - Michael Teroy
-  - Craig McGowan
-  - Collin McCord
-  - Joseph Kiehne
+    Group Members:
+    - Michael Teroy
+    - Craig McGowan
+    - Collin McCord
+    - Joseph Kiehne
+    Labs: Tuned Mass Damper,Acoustics,Pump,Dynamic Balancing,Piezoelectric
 - 305B:
-  - Nathaniel Randell
-  - Xavier Cahill
-  - Andrew Merkel
-  - Hunter Womick
+    Group Members:
+    - Nathaniel Randell
+    - Xavier Cahill
+    - Andrew Merkel
+    - Hunter Womick
+    Labs: Tuned Mass Damper,Acoustics,Dynamic Balancing,Piezoelectric,Pump
 - 305C:
-  - Aidan Johnson
-  - Gavin Boehme
-  - Mason Thompson
-  - Maddisyn Reed
+    Group Members:
+    - Aidan Johnson
+    - Gavin Boehme
+    - Mason Thompson
+    - Maddisyn Reed
+    Labs: Dynamic Balancing,Acoustics,Tuned Mass Damper,Pump,Piezoelectric
 - 305D:
-  - Zachary Parr
-  - Ryan Ewald
-  - Benjamin Beilman
-  - Tyler Rowden
+    Group Members:
+    - Zachary Parr
+    - Ryan Ewald
+    - Benjamin Beilman
+    - Tyler Rowden
+    Labs: Acoustics,Dynamic Balancing,Tuned Mass Damper,Piezoelectric,Pump
 - 307A:
-  - Dakota Duran
-  - Wade Arnzen
-  - Cole Komyati
+    Group Members:
+    - Dakota Duran
+    - Wade Arnzen
+    - Cole Komyati
+    Labs: Tuned Mass Damper,Dynamic Balancing,Pump,Acoustics,Piezoelectric
 - 307B:
-  - Emma Schouten
-  - Allie Dingfield
-  - Caleb McCleary
+    Group Members:
+    - Emma Schouten
+    - Allie Dingfield
+    - Caleb McCleary
+    Labs: Dynamic Balancing,Pump,Tuned Mass Damper,Piezoelectric,Acoustics
 - 307C:
-  - Connor Bichsel
-  - Zachary Thomason
-  - Chance Mikkelson
+    Group Members:
+    - Connor Bichsel
+    - Zachary Thomason
+    - Chance Mikkelson
+    Labs: Acoustics,Dynamic Balancing,Tuned Mass Damper,Pump,Piezoelectric
 - 307D:
-  - Mikayla Massie
-  - Ryan Baas
-  - Melissa Parker
+    Group Members:
+    - Mikayla Massie
+    - Ryan Baas
+    - Melissa Parker
+    Labs: Acoustics,Dynamic Balancing,Tuned Mass Damper,Piezoelectric,Pump
 - 307E:
-  - Brayden Pratt
-  - Sam Calandro
-  - Jack Jaeger
-  - Jacob Rodeghero
+    Group Members:
+    - Brayden Pratt
+    - Sam Calandro
+    - Jack Jaeger
+    - Jacob Rodeghero
+    Labs: Acoustics,Pump,Dynamic Balancing,Tuned Mass Damper,Piezoelectric
 - 309A:
-  - Anna Robertson
-  - Dakota Gotsch
-  - Jacob Hawkins
-  - Landen Stephens
+    Group Members:
+    - Anna Robertson
+    - Dakota Gotsch
+    - Jacob Hawkins
+    - Landen Stephens
+    Labs: Pump,Tuned Mass Damper,Dynamic Balancing,Acoustics,Piezoelectric
 - 309B:
-  - Parker Wideman
-  - Matthew Hoffman
-  - Austin Frazier
+    Group Members:
+    - Parker Wideman
+    - Matthew Hoffman
+    - Austin Frazier
+    Labs: Dynamic Balancing,Tuned Mass Damper,Pump,Acoustics,Piezoelectric
 - 309C:
-  - Nishat Mamnoon
-  - Sydney Hayton
-  - Cameron Ryan
-  - Connor Brown
+    Group Members:
+    - Nishat Mamnoon
+    - Sydney Hayton
+    - Cameron Ryan
+    - Connor Brown
+    Labs: Acoustics,Dynamic Balancing,Tuned Mass Damper,Pump,Piezoelectric
 - 309D:
-  - Hugh Steinman
-  - Maxwell Forbes
-  - Madison McKenzie
-  - William Strecker
+    Group Members:
+    - Hugh Steinman
+    - Maxwell Forbes
+    - Madison McKenzie
+    - William Strecker
+    Labs: Dynamic Balancing,Tuned Mass Damper,Pump,Acoustics,Piezoelectric
 - 313A:
-  - Thang Le
-  - Rohit Ramamoorthy
-  - Edward Henneberry
-  - Camron Walsh
+    Group Members:
+    - Thang Le
+    - Rohit Ramamoorthy
+    - Edward Henneberry
+    - Camron Walsh
+    Labs: Dynamic Balancing,Pump,Tuned Mass Damper,Acoustics,Piezoelectric
 - 313B:
-  - Jackson Flores
-  - Julianna Everett
-  - Zebedee McMenamy
+    Group Members:
+    - Jackson Flores
+    - Julianna Everett
+    - Zebedee McMenamy
+    - Hayden Cook
+    Labs: Dynamic Balancing,Acoustics,Piezoelectric,Tuned Mass Damper,Pump
 - 313C:
-  - Edvin Linhorst
-  - Michael McDowell
-  - Otto Ottiger
-- 313D:
-  - Hayden Cook
-  - Tohajie Raet
-  - Christian Rosales
-  - Ethan Watson
+    Group Members:
+    - Edvin Linhorst
+    - Michael McDowell
+    - Otto Ottiger
+    - Ethan Watson
+    Labs: Dynamic Balancing,Pump,Tuned Mass Damper,Acoustics,Piezoelectric

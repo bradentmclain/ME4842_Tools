@@ -103,10 +103,12 @@ class CanvasTool:
 			data = yaml.safe_load(f)
 
 		students = []
-		for groups in data['Groups']:
-			for name, members in groups.items():
-				for student in members:
-					students.append(student)
+		for group in data['Groups']:
+			group_name = list(group.keys())[0]
+			print(group_name)
+			for student in group[group_name]['Group Members']:
+				students.append(student)
+
 		
 		for ungrouped in data['Students not in Group']:
 			for section, ungrouped_student in ungrouped.items():
@@ -120,7 +122,7 @@ class CanvasTool:
 					print(f'{double_booked_student} is in more than one group. Please resolve in groups.yml')
 					error = True
 
-		if error == True:
+		if error:
 			return
 		
 		existing_canvas_group_names = []
@@ -129,21 +131,23 @@ class CanvasTool:
 
 		#create necessary groups
 		for groups in data['Groups']:
-			for group_name, members in groups.items():
-				if group_name not in existing_canvas_group_names:
-					self.project_group_category.create_group(name=group_name)
+			group_name = list(group.keys())[0]
+			if group_name not in existing_canvas_group_names:
+				#self.project_group_category.create_group(name=group_name)
+				print(f'gonna create {group_name.name}')
 
 		#add students to respective groups
 		for groups in data['Groups']:
-			for group_name, members in groups.items():
+			group_name = list(groups.keys())[0]
+			for student in groups[group_name]['Group Members']:
 				groups = list(self.project_group_category.get_groups())
+				print(f'loading group {group_name}')
 				canvas_group = next((g for g in groups if g.name == group_name), None)
-				if canvas_group != 'None':
-					for student in members:
-						uid = self.student_data[student][0]
-						print(f'adding student {student} to group {canvas_group.name}')
-						canvas_group.create_membership(user=uid)
-						#print(f'gonna try to add {student} to {canvas_group.name}')
+				if canvas_group != None:
+					uid = self.student_data[student][0]
+					print(f'adding student {student} to group {canvas_group.name}')
+					#canvas_group.create_membership(user=uid)
+
 						
 
 if __name__ == "__main__":
