@@ -307,8 +307,7 @@ class Grader:
 
 if __name__ == "__main__":
 	grad = Grader()
-	grad.organize_responses()
-	grad.create_groups()
+	#grad.organize_responses()
 	grad.assign_labs()
 
 	# for grade in proposal_grades:
