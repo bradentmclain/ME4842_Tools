@@ -157,7 +157,7 @@ if __name__ == "__main__":
 	#mycanvas.upload_groups()
 	#print(mycanvas.student_data)
 	#mycanvas.print_student_emails()
-	mycanvas.print_survey_config()
+	mycanvas.print_student_emails()
 
 	#print(mycanvas.student_data)
 	# print('uploading assignment')
