@@ -47,7 +47,7 @@ class CanvasTool:
 		for group in self.groups:
 			members = group.get_users()
 			for member in members:
-				self.student_data[member.name][1]= group.name
+				self.student_data[member.name][2]= group.name
 
 
 	def print_survey_config(self):
@@ -154,10 +154,10 @@ if __name__ == "__main__":
 	mycanvas = CanvasTool()
 	mycanvas.find_student_data()
 
-	mycanvas.upload_groups()
+	#mycanvas.upload_groups()
 	#print(mycanvas.student_data)
 	#mycanvas.print_student_emails()
-	#mycanvas.print_survey_config()
+	mycanvas.print_survey_config()
 
 	#print(mycanvas.student_data)
 	# print('uploading assignment')

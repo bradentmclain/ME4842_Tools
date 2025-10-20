@@ -72,6 +72,7 @@ def init_firebase():
 		cred = credentials.Certificate(cred)
 		firebase_admin.initialize_app(cred, {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"})
 
+init_firebase()
 #write response to Proposal database
 ref = db.reference("Proposal_Response")
 
@@ -93,8 +94,12 @@ if st.session_state['active_section'] != 'Click to Select':
 #Select group to review
 st.header("Presentation Review")
 if st.session_state['active_section'] != 'Click to Select':
-	group = st.selectbox("Select the group that is presenting", options=["Click to Select"]+list(students_by_section_group[st.session_state['active_section']].keys()),key='active_group',index=0)
-	st.write(st.session_state['active_group'])
+		group = st.selectbox(
+		"Select the group that is presenting",
+		options=["Click to Select"] + sorted(list(students_by_section_group[st.session_state['active_section']].keys())),
+		key='active_group',
+		index=0
+	)
 
 
 # Only proceed with questions if student group,section, and name have been selected, make sure default is not selected
@@ -142,24 +147,22 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 		enthusiasm = st.radio(f"**Enthusiasm**", individual_responses, key=f"ind_enthusiasm_{student}",index=0)
 		overall = st.radio(f"**Speaking**", individual_responses, key=f"ind_speaking_{student}",index=0)
 		comments = st.text_area(f"**Individual feedback for {student} (optional):**", key=f"ind_feedback_{student}")
+
 		
-		#store responses in string to save as df
-		ind_feedback_string = "$*".join([
-			st.session_state.active_user,
-			str(weight),
-			student,
-			dress_code,
-			audience_engagement,
-			body_language,
-			enthusiasm,
-			overall,
-			comments
-			])
+		ind_feedback_dict = {
+		"response_type":'Individual',
+		"active_user": st.session_state.active_user,
+		"scoring_weight": weight,
+		"student_being_reviewed": student,
+		"dress_code_score": dress_code,
+		"audience_engagement_score": audience_engagement,
+		"body_language_score": body_language,
+		"enthusiasm_score": enthusiasm,
+		"overall_score": overall,
+		"written_feedback": comments
+		}
 		
-		ind_scores.append({
-			"Survey_ID": "Proposal_Individual",
-			"Data": ind_feedback_string
-		})
+		ind_scores.append(ind_feedback_dict)
 
 	#group survey question
 	st.subheader(f"**Score {group}:**")
@@ -171,50 +174,26 @@ if st.session_state['active_section'] != "Click to Select" and st.session_state[
 	group_answer_questions = st.number_input(f"**Overall ability to answer questions.** Did {group} work well together to answer the audience and reviewer questions?",key=f"group_answer_questions_{group}",min_value=0.0,max_value=10.0,step=0.1, format="%.1f")
 
 	#store responses in string to save as df
-	group_feedback_string = "$*".join([
-		st.session_state.active_user,
-		str(weight),
-		','.join(students),
-		st.session_state.active_group,
-		str(group_comments),
-		str(group_technical),
-		str(group_efficacy),
-		str(group_completeness),
-		str(group_presentation_quality),
-		str(group_answer_questions)
-		])
 	
-	group_scores = {
-		"Survey_ID": "Proposal_Group",  # or your preferred ID
-		"Data": group_feedback_string
+	group_feedback_dict = {
+	"response_type":'Group',
+	"active_user": st.session_state.active_user,
+	"scoring_weight": weight,
+	"student_being_reviewed": students,
+	"group_being_scored": st.session_state.active_group,
+	"written_feedback": group_comments,
+	"technical_content_score": group_technical,
+	"experimental_efficacy_score": group_efficacy,
+	"completeness_score": group_completeness,
+	"presentation_quality_score": group_presentation_quality,
+	"answering_questions_score": group_answer_questions
 	}
-	group_df = pd.DataFrame([group_scores])
+
 
 	#on data submission
 	if st.button("Submit Feedback"):
 		# create new connection, create new worksheet for individual user
-		ref.push(group_scores)
-
-		
-		
-		
-		conn = st.connection("gsheets", type=GSheetsConnection)
-		with st.spinner("Uploading Data...", show_time=True):
-			sh = conn._instance._open_spreadsheet()
-			worksheets = sh.worksheets()
-			available_sheets = []
-			#gather all worksheets
-			for worksheet in worksheets:
-				available_sheets.append(worksheet.title)
-			#if a worksheet exists, append to it. if not, make a new one
-			if st.session_state.active_user in available_sheets:
-				prev_data = conn.read(worksheet=st.session_state.active_user, ttl=0)
-				ind_df = pd.DataFrame(ind_scores)
-				group_df = pd.DataFrame([group_scores])
-				conn.update(worksheet=st.session_state.active_user,data=pd.concat([prev_data,ind_df,group_df]))
-			else:
-				ind_df = pd.DataFrame(ind_scores)
-				group_df = pd.DataFrame([group_scores])
-				conn.create(worksheet=st.session_state.active_user, data=pd.concat([ind_df,group_df]))
-		#after data has been uploaded, ask if user wants to review another group
+		ref.push(group_feedback_dict)
+		for ind_response in ind_scores:
+			ref.push(ind_response)
 		show_review_prompt()

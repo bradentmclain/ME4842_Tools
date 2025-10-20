@@ -1,0 +1,421 @@
+import gspread
+import toml
+import json
+import pandas as pd
+from pprint import pprint
+from collections import Counter
+import yaml
+import stutts_picker as picker
+import os
+import shutil
+import firebase_admin
+from firebase_admin import credentials, db
+import streamlit as st
+
+#GRADER FOR ME4842 SURVEYS, THIS USES A STANDARD RESPONSE AND GRADEBOOK FOR ALL ASSIGNMENTS
+class Grader:
+	# Positions of points, rects, displacements
+	def __init__(self):
+		#student response book shape is {name: [assignment_id,responses]}
+		self.student_responsebook = {}
+
+		#student gradebook shape is {name: [weight, score, written_feedback]}
+		self.student_gradebook = {}
+
+	#######BOOK KEEPING FUNCTIONS########
+	def organize_responses(self,):
+		if not firebase_admin._apps:
+			#database authentication
+			cred = dict(st.secrets["firebase_creds"])
+			cred = credentials.Certificate(cred)
+			firebase_admin.initialize_app(cred, {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"})
+
+
+		
+	def grade_prop(self,):
+		#write response to Proposal database
+		ref = db.reference("Proposal_Response")
+		responses = ref.get()
+
+		for key,response in responses.items(): 
+			reviewee = response['student_being_reviewed']
+			if isinstance(reviewee,list):
+				for student in reviewee:
+					if student in self.student_responsebook.keys():
+						self.student_responsebook[student].append(response)
+					else:
+						self.student_responsebook[student] = [response]
+			else:
+				if reviewee in self.student_responsebook.keys():
+					self.student_responsebook[reviewee].append(response)
+				else:
+					self.student_responsebook[reviewee] = [response]
+
+		rating_map = {"Substandard": 1,"Poor": 2,"Acceptable": 3,"Good": 4,"Excellent": 5}
+
+		#structured [[student name, grade, comments]]
+		self.proposal_gradebook = {}
+
+		for student,responses in self.student_responsebook.items():
+			print(student)
+
+			ind_scores = {
+				"dress_code_score": {"pts": 0, "total": 0},
+				"audience_engagement_score": {"pts": 0, "total": 0},
+				"body_language_score": {"pts": 0, "total": 0},
+				"enthusiasm_score": {"pts": 0, "total": 0},
+				"overall_score": {"pts": 0, "total": 0},
+				"written_feedback": []
+			}
+			group_scores = {
+				"technical_content_score": {"pts": 0, "total": 0},
+				"experimental_efficacy_score": {"pts": 0, "total": 0},
+				"completeness_score": {"pts": 0, "total": 0},
+				"presentation_quality_score": {"pts": 0, "total": 0},
+				"answering_questions_score": {"pts": 0, "total": 0},
+				"written_feedback": []
+			}
+			
+			for response in responses:
+				response_type = response['response_type']
+				weight = response['scoring_weight']
+				if response_type == 'Individual':
+					for question, score_data in ind_scores.items():
+						if question == "written_feedback":
+							if response.get("written_feedback"):
+								score_data.append(response["written_feedback"])
+						else:
+							label = response.get(question)
+							if label is not None:
+								numeric_score = rating_map[label]
+								ind_scores[question]["pts"] += float(numeric_score) * weight
+								ind_scores[question]["total"] += weight * 5
+
+				elif response_type == 'Group':
+					group_name = response['group_being_scored']
+					for question, score_data in group_scores.items():
+						if question == "written_feedback":
+							if response.get("written_feedback"):
+								score_data.append(response["written_feedback"])
+						else:
+							score = response.get(question)
+							if score is not None:
+								group_scores[question]["pts"] += float(score) * weight
+								group_scores[question]["total"] += weight * 5
+		
+			individual_score_normalized = sum(v["pts"] for v in ind_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in ind_scores.values() if isinstance(v, dict))
+			group_score_normalized = sum(v["pts"] for v in group_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in group_scores.values() if isinstance(v, dict))
+			overall_score = (individual_score_normalized*25) + (group_score_normalized *10)
+
+
+			text_feedback = f"""
+			---------------------------------------------------
+			Individual Scores: {student}
+			---------------------------------------------------
+			Dress Code: {(ind_scores["dress_code_score"]["pts"] / ind_scores["dress_code_score"]["total"] * 100):.2f}%
+			Audience Engagement: {(ind_scores["audience_engagement_score"]["pts"] / ind_scores["audience_engagement_score"]["total"] * 100):.2f}%
+			Body Language: {(ind_scores["body_language_score"]["pts"] / ind_scores["body_language_score"]["total"] * 100):.2f}%
+			Enthusiasm: {(ind_scores["enthusiasm_score"]["pts"] / ind_scores["enthusiasm_score"]["total"] * 100):.2f}%
+			Speaking: {(ind_scores["overall_score"]["pts"] / ind_scores["overall_score"]["total"] * 100):.2f}%
+			
+			Individual Score: {individual_score_normalized*100:.2f}%
+			Individual Points: {individual_score_normalized*25:.2f} / 25
+
+			Inidvidual Feedback Recieved: {"\n".join(ind_scores["written_feedback"])}
+
+			---------------------------------------------------
+			Group Scores: {group_name}
+			---------------------------------------------------
+			Technical: {(group_scores["technical_content_score"]["pts"] / group_scores["technical_content_score"]["total"] * 100):.2f}%
+			Efficacy: {(group_scores["experimental_efficacy_score"]["pts"] / group_scores["experimental_efficacy_score"]["total"] * 100):.2f}%
+			Completeness: {(group_scores["completeness_score"]["pts"] / group_scores["completeness_score"]["total"] * 100):.2f}%
+			Presentation Quality: {(group_scores["presentation_quality_score"]["pts"] / group_scores["presentation_quality_score"]["total"] * 100):.2f}%
+			Ability to Answer Questions: {(group_scores["answering_questions_score"]["pts"] / group_scores["answering_questions_score"]["total"] * 100):.2f}%
+			
+			Group Score: {group_score_normalized*100:.2f}%
+			Group Points: {group_score_normalized*10:.2f} / 10
+			
+			Group Feedback Recieved: {"\n".join(group_scores["written_feedback"])}
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			{individual_score_normalized*25:.2f} + {group_score_normalized*10:.2f}  = {overall_score:.2f}/35 
+			"""
+
+			self.proposal_gradebook[student] = [overall_score,text_feedback]
+
+
+
+
+	def create_groups(self,):
+		group_letters = ['A','B','C','D','E']
+
+		#formatted as {section:Group A, Group B...}
+		student_groups = {}
+		grouped_students = []
+
+		for student_name, responses in self.student_responsebook.items():
+
+			for assignment_id, data in responses:
+				if assignment_id == 'Group_Lab_Selection':
+					members, labs, section = data
+					members = json.loads(members.replace("'",'"'))
+					labs = json.loads(labs.replace("'",'"'))
+					labs = ','.join(labs)
+
+					if section not in student_groups.keys():
+						student_groups[section] = {}
+						student_groups[section][section+group_letters[0]] = {}
+						student_groups[section][section+group_letters[0]]['Group Members'] = members
+						student_groups[section][section+group_letters[0]]['Labs'] = labs
+						grouped_students=grouped_students+members
+					else:
+						group_letter_idx = len(student_groups[section].keys())
+						student_groups[section][section+group_letters[group_letter_idx]] = {}
+						student_groups[section][section+group_letters[group_letter_idx]]['Group Members'] = members
+						student_groups[section][section+group_letters[group_letter_idx]]['Labs'] = labs
+						grouped_students=grouped_students+members
+
+
+		student_counts = Counter()
+
+		for section in student_groups.keys():
+			for group in student_groups[section].keys():
+				print(f'{group}: {student_groups[section][group]}')
+				students = student_groups[section][group]['Group Members']
+				student_counts.update(students)
+		print(student_counts)
+		secrets = toml.load(".streamlit/secrets.toml")
+		students = secrets['class_list']['students']
+	
+		# (Section, Name, Group)
+
+		students: list[tuple[str, str]] = [(info.split(',')[0], info.split(',')[-1]) for info in students]
+		not_in_groups = []
+		in_multiple_groups = []
+
+		# Find students not assigned.
+		for student in students:
+			if student[1] not in student_counts.keys():
+				print(student[1] + " is not in a group.")
+
+				not_in_groups.append(student)
+		
+		# Find students in multiple groups.
+		for student in student_counts:
+			if student_counts[student] > 1:
+				print(student + " is assigned to multiple groups.")
+
+				# Search pre-existing list of students for name.
+				student = next((s for s in students if s[1] == student), None)
+				assert student is not None
+
+				in_multiple_groups.append(student)
+		
+		if os.path.exists('groups.yml'):
+			user_data = input('A groups.yml file already exisits. Do you want to overwrite it? (Y/N)\n')
+			if user_data == "N" or 'n':
+				return
+			
+		self.export_groups(student_groups, not_in_groups, in_multiple_groups)
+
+
+	def assign_labs(self,):
+		# Run picker
+
+		pref_responses = {}
+
+		shutil.rmtree("assignments", ignore_errors=True)
+		os.mkdir("assignments")
+
+		with open("groups.yml", "r") as f:
+			data = yaml.safe_load(f)
+
+		sections_data_yaml = {}
+
+		for group in data['Groups']:
+			group_name = list(group.keys())[0]
+			section = group_name[0:3]
+			if section in sections_data_yaml.keys():
+				sections_data_yaml[section][group_name] = group[group_name]['Labs']
+			else:
+				sections_data_yaml[section] = {}
+				sections_data_yaml[section][group_name] = group[group_name]['Labs']
+
+		
+		for section_name, data in sections_data_yaml.items():
+			group_data = []
+			for group_name, labs in data.items():
+				labs = labs.split(',')
+				group_data.append({
+					"Group": group_name,
+					"Electives": labs
+				})
+
+			groups, costs, ranks = picker.process_input_and_build_costs(group_data, ['Acoustics', 'Pump', 'Tuned Mass Damper', 'Dynamic Balancing', 'Piezoelectric'], unlisted_penalty=5, seed=1)
+
+			# if len(groups) > 5:
+			#     raise SystemExit(f"Infeasible: {len(groups)} groups but only 5 one-station electives per week. Split the section or add capacity.")
+			result, status = picker.solve_ilp(groups, costs, T=2)
+			if status != "ok":
+				result, status = picker.solve_greedy(groups, costs, T=2)
+
+			picker.write_output(f"assignments/{section_name}.xlsx", result, groups, costs, ranks, None, 5, T=2)
+			print(json.dumps({"status": status, "total_cost": result["total_cost"], "groups": len(groups)}))
+
+
+	def export_groups(self, student_groups: dict[str, dict[str, list[str]]], students_not_in_groups: list[tuple[str, str]], students_in_multiple_groups: list[str]):
+		with open("groups.yml", "w") as f:
+
+
+			groups = []
+			for section in sorted(student_groups.keys()):
+				for group in student_groups[section].keys():
+					groups.append({group: student_groups[section][group]})
+			
+			# Sort by section.
+			groups = sorted(groups, key=lambda k: list(k.keys())[0][:-1])
+			header = {
+				"Students in Multiple Groups": [{student[0]: student[1]} for student in students_in_multiple_groups],
+				"Students not in Group": [{student[0]: student[1]} for student in students_not_in_groups]
+			}
+
+			data = {
+				"Groups": groups
+			}
+			f.write(yaml.dump({"Information":"Please resolve all conflicts before uploading to Canvas. Do not delete conflict notes."}))
+			f.write(yaml.dump(header))
+			f.write(yaml.dump(data))
+		
+
+	def grade_proposal(self):
+
+		for student_name, responses in self.student_responsebook.items():
+			for assignment_id, data in responses:
+				name = data[2]
+				if ',' in name:
+					names = name.split(',')
+					
+					for name in names:
+						if name not in self.student_gradebook.keys():
+							self.student_gradebook[name] = [[assignment_id, data]]
+						else:
+							self.student_gradebook[name].append([assignment_id, data])
+				else:
+					if name not in self.student_gradebook.keys():
+						self.student_gradebook[name] = [[assignment_id, data]]
+					else:
+						self.student_gradebook[name].append([assignment_id, data])
+
+		individual_questions = ['dress_code', 'audience_engagement', 'body_language','enthusiasm','overall']
+		group_questions = ['technical', 'efficacy', 'completeness','presentation_quality','answer_questions']
+		individual_response_options = ['Substandard', 'Poor', 'Acceptable', 'Good', 'Excellent']
+		response_scores = {resp: i + 1 for i, resp in enumerate(individual_response_options)}
+
+		#structured [[student name, grade, comments]]
+		self.proposal_gradebook = {}
+
+		for student in self.student_gradebook.keys():
+			ind_scores = {
+				"dress_code": {"pts": 0, "total": 0},
+				"audience_engagement": {"pts": 0, "total": 0},
+				"body_language": {"pts": 0, "total": 0},
+				"enthusiasm": {"pts": 0, "total": 0},
+				"overall": {"pts": 0, "total": 0},
+				"comments": []
+			}
+			group_scores = {
+				"technical": {"pts": 0, "total": 0},
+				"efficacy": {"pts": 0, "total": 0},
+				"completeness": {"pts": 0, "total": 0},
+				"presentation_quality": {"pts": 0, "total": 0},
+				"answer_questions": {"pts": 0, "total": 0},
+				"comments": []
+			}
+			
+			for assignment_id, data in self.student_gradebook[student]:
+				if assignment_id == 'Proposal_Individual':
+					#data = reviewer name, reviewer weight, reviewee name, dress score, engagement score, body language score, enthusiasm score, speaking score, comments
+					weight = float(data[1])
+					scores = [response_scores.get(x, x) for x in data[3:8]]
+					comments = data[8]
+					for q, s in zip(individual_questions, scores):
+						ind_scores[q]["pts"]   += s * weight
+						ind_scores[q]["total"] += 5 * weight
+					if comments != '':
+						ind_scores['comments'].append(comments)
+				elif assignment_id == 'Proposal_Group':
+					#data = Reviewer name, weight, group members, Group code,comments, techincal, efficacy, comepleteness, quality, questions
+					weight = float(data[1])
+					scores = [float(x) for x in data[5:]]
+					comments = data[4]
+					group_name = data[3]
+					for q, s in zip(group_questions, scores):
+						group_scores[q]["pts"]   += s * weight
+						group_scores[q]["total"] += 10 * weight
+					if comments != '':
+						group_scores['comments'].append(comments)
+
+			individual_score_normalized = sum(v["pts"] for v in ind_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in ind_scores.values() if isinstance(v, dict))
+			group_score_normalized = sum(v["pts"] for v in group_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in group_scores.values() if isinstance(v, dict))
+			overall_score = (individual_score_normalized*25) + (group_score_normalized *10)
+
+
+			text_feedback = f"""
+			---------------------------------------------------
+			Individual Scores: {student}
+			---------------------------------------------------
+			Dress Code: {(ind_scores["dress_code"]["pts"] / ind_scores["dress_code"]["total"] * 100):.2f}%
+			Audience Engagement: {(ind_scores["audience_engagement"]["pts"] / ind_scores["audience_engagement"]["total"] * 100):.2f}%
+			Body Language: {(ind_scores["body_language"]["pts"] / ind_scores["body_language"]["total"] * 100):.2f}%
+			Enthusiasm: {(ind_scores["enthusiasm"]["pts"] / ind_scores["enthusiasm"]["total"] * 100):.2f}%
+			Speaking: {(ind_scores["overall"]["pts"] / ind_scores["overall"]["total"] * 100):.2f}%
+			
+			Individual Score: {individual_score_normalized*100:.2f}%
+			Individual Points: {individual_score_normalized*25:.2f} / 25
+
+			Inidvidual Feedback Recieved: {"\n".join(ind_scores["comments"])}
+
+			---------------------------------------------------
+			Group Scores: {group_name}
+			---------------------------------------------------
+			Technical: {(group_scores["technical"]["pts"] / group_scores["technical"]["total"] * 100):.2f}%
+			Efficacy: {(group_scores["efficacy"]["pts"] / group_scores["efficacy"]["total"] * 100):.2f}%
+			Completeness: {(group_scores["completeness"]["pts"] / group_scores["completeness"]["total"] * 100):.2f}%
+			Presentation Quality: {(group_scores["presentation_quality"]["pts"] / group_scores["presentation_quality"]["total"] * 100):.2f}%
+			Ability to Answer Questions: {(group_scores["answer_questions"]["pts"] / group_scores["answer_questions"]["total"] * 100):.2f}%
+			
+			Group Score: {group_score_normalized*100:.2f}%
+			Group Points: {group_score_normalized*10:.2f} / 10
+			
+			Group Feedback Recieved: {"\n".join(group_scores["comments"])}
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			{individual_score_normalized*25:.2f} + {group_score_normalized*10:.2f}  = {overall_score:.2f}/35 
+			"""
+
+			self.proposal_gradebook[student] = [overall_score,text_feedback]
+		return self.proposal_gradebook
+
+
+
+if __name__ == "__main__":
+	grad = Grader()
+	#grad.organize_responses()
+	grad.organize_responses()
+	grad.grade_prop()
+	for student,values in grad.proposal_gradebook.items():
+		print(values[1])
+
+	# for grade in proposal_grades:
+	# 	print(grade[2])
+	#for student in grad.student_gradebook.keys():
+		# print(student,grad.student_gradebook[student])
+		# print('\n')
