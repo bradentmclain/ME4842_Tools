@@ -6,6 +6,7 @@ from collections import defaultdict
 import random
 import firebase_admin
 from firebase_admin import credentials, db
+import numpy as np
 
 # =========================
 # AUTH CONFIG
