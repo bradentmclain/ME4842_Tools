@@ -98,7 +98,7 @@ def init_firebase():
 
 init_firebase()
 #write response to Proposal database
-ref = db.reference("Test")
+ref = db.reference("Proposal_Response2")
 
 ####Begin UI Here
 st.title("ME4842 Proposal Presentation Feedback")

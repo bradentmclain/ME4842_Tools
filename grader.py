@@ -309,6 +309,7 @@ if __name__ == "__main__":
 	grad = Grader()
 	#grad.organize_responses()
 	grad.assign_labs()
+	
 
 	# for grade in proposal_grades:
 	# 	print(grade[2])
