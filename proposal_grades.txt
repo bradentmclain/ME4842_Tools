@@ -2,147 +2,1316 @@
 			---------------------------------------------------
 			Individual Scores: Cavitt Bruhn
 			---------------------------------------------------
-			Dress Code: 85.00%
-			Audience Engagement: 85.00%
-			Body Language: 85.00%
+			Dress Code: 100.00%
+			Audience Engagement: 83.24%
+			Body Language: 90.29%
 			Enthusiasm: 85.00%
-			Speaking: 85.00%
+			Speaking: 81.47%
 			
-			Individual Score: 85.00%
-			Individual Points: 21.25 / 25
+			Individual Score: 88.00%
+			Individual Points: 22.00 / 25
 
-			Inidvidual Feedback Recieved: 
+			Inidvidual Feedback Recieved: A little too much reading directly from the slides, but the use of the cards for technical information was a good idea
+Used notecards
+NA
+dont read off of the note cards
+Try not to use note cards.
+Should be able to deliver w/o notes.  Needed more practice. 
 
 			---------------------------------------------------
 			Group Scores: 301A
 			---------------------------------------------------
-			Technical: 100.00%
-			Efficacy: 100.00%
-			Completeness: 100.00%
-			Presentation Quality: 100.00%
-			Ability to Answer Questions: 100.00%
+			Technical: 89.53%
+			Efficacy: 88.24%
+			Completeness: 94.65%
+			Presentation Quality: 86.47%
+			Ability to Answer Questions: 92.94%
 			
-			Group Score: 100.00%
-			Group Points: 10.00 / 10
+			Group Score: 90.36%
+			Group Points: 9.04 / 10
 			
-			Group Feedback Recieved: 
+			Group Feedback Recieved: Great overall presentation but possibly needed more practice. Technical knowledge was well communicated 
+I think the group seemed confident overall with well prepared material.
+Well written presentation very similar to heat transfer lab
+Should use existing equipment and methods.
 
 			---------------------------------------------------
 			Final Assignment Grade
 			---------------------------------------------------
 			Group Score + Individual Score = Overall Score
 			
-			21.25 + 10.00  = 31.25/35 
+			22.00 + 9.04  = 31.04/35 
 			
 
 
 			---------------------------------------------------
 			Individual Scores: Clairese Kluba
 			---------------------------------------------------
-			Dress Code: 100.00%
-			Audience Engagement: 100.00%
-			Body Language: 100.00%
-			Enthusiasm: 100.00%
-			Speaking: 100.00%
+			Dress Code: 96.47%
+			Audience Engagement: 85.88%
+			Body Language: 89.41%
+			Enthusiasm: 84.12%
+			Speaking: 85.88%
 			
-			Individual Score: 100.00%
-			Individual Points: 25.00 / 25
+			Individual Score: 88.35%
+			Individual Points: 22.09 / 25
 
-			Inidvidual Feedback Recieved: 
+			Inidvidual Feedback Recieved: More eye contact with audience
+Good calm tone. Talked well about background
+NA
+Maybe needed a bit more practice.  
 
 			---------------------------------------------------
 			Group Scores: 301A
 			---------------------------------------------------
-			Technical: 100.00%
-			Efficacy: 100.00%
-			Completeness: 100.00%
-			Presentation Quality: 100.00%
-			Ability to Answer Questions: 100.00%
+			Technical: 89.53%
+			Efficacy: 88.24%
+			Completeness: 94.65%
+			Presentation Quality: 86.47%
+			Ability to Answer Questions: 92.94%
 			
-			Group Score: 100.00%
-			Group Points: 10.00 / 10
+			Group Score: 90.36%
+			Group Points: 9.04 / 10
 			
-			Group Feedback Recieved: 
+			Group Feedback Recieved: Great overall presentation but possibly needed more practice. Technical knowledge was well communicated 
+I think the group seemed confident overall with well prepared material.
+Well written presentation very similar to heat transfer lab
+Should use existing equipment and methods.
 
 			---------------------------------------------------
 			Final Assignment Grade
 			---------------------------------------------------
 			Group Score + Individual Score = Overall Score
 			
-			25.00 + 10.00  = 35.00/35 
+			22.09 + 9.04  = 31.12/35 
 			
 
 
 			---------------------------------------------------
 			Individual Scores: Benjamin Lampe
 			---------------------------------------------------
-			Dress Code: 55.00%
-			Audience Engagement: 55.00%
-			Body Language: 55.00%
-			Enthusiasm: 55.00%
-			Speaking: 55.00%
+			Dress Code: 100.00%
+			Audience Engagement: 87.65%
+			Body Language: 86.76%
+			Enthusiasm: 85.88%
+			Speaking: 90.29%
 			
-			Individual Score: 55.00%
-			Individual Points: 13.75 / 25
+			Individual Score: 90.12%
+			Individual Points: 22.53 / 25
 
-			Inidvidual Feedback Recieved: 
+			Inidvidual Feedback Recieved: Good presentation skills, but said ‘um’ a little too much
+NA
 
 			---------------------------------------------------
 			Group Scores: 301A
 			---------------------------------------------------
-			Technical: 100.00%
-			Efficacy: 100.00%
-			Completeness: 100.00%
-			Presentation Quality: 100.00%
-			Ability to Answer Questions: 100.00%
+			Technical: 89.53%
+			Efficacy: 88.24%
+			Completeness: 94.65%
+			Presentation Quality: 86.47%
+			Ability to Answer Questions: 92.94%
 			
-			Group Score: 100.00%
-			Group Points: 10.00 / 10
+			Group Score: 90.36%
+			Group Points: 9.04 / 10
 			
-			Group Feedback Recieved: 
+			Group Feedback Recieved: Great overall presentation but possibly needed more practice. Technical knowledge was well communicated 
+I think the group seemed confident overall with well prepared material.
+Well written presentation very similar to heat transfer lab
+Should use existing equipment and methods.
 
 			---------------------------------------------------
 			Final Assignment Grade
 			---------------------------------------------------
 			Group Score + Individual Score = Overall Score
 			
-			13.75 + 10.00  = 23.75/35 
+			22.53 + 9.04  = 31.57/35 
 			
 
 
 			---------------------------------------------------
 			Individual Scores: Dominic Ponciroli
 			---------------------------------------------------
-			Dress Code: 40.00%
-			Audience Engagement: 40.00%
-			Body Language: 40.00%
-			Enthusiasm: 40.00%
-			Speaking: 40.00%
+			Dress Code: 100.00%
+			Audience Engagement: 85.88%
+			Body Language: 84.12%
+			Enthusiasm: 81.47%
+			Speaking: 76.18%
 			
-			Individual Score: 40.00%
-			Individual Points: 10.00 / 25
+			Individual Score: 85.53%
+			Individual Points: 21.38 / 25
 
-			Inidvidual Feedback Recieved: 
+			Inidvidual Feedback Recieved: Seemed a little nervous at the beginning, but great technical knowledge
+NA
 
 			---------------------------------------------------
 			Group Scores: 301A
 			---------------------------------------------------
-			Technical: 100.00%
-			Efficacy: 100.00%
-			Completeness: 100.00%
-			Presentation Quality: 100.00%
-			Ability to Answer Questions: 100.00%
+			Technical: 89.53%
+			Efficacy: 88.24%
+			Completeness: 94.65%
+			Presentation Quality: 86.47%
+			Ability to Answer Questions: 92.94%
 			
-			Group Score: 100.00%
-			Group Points: 10.00 / 10
+			Group Score: 90.36%
+			Group Points: 9.04 / 10
 			
-			Group Feedback Recieved: 
+			Group Feedback Recieved: Great overall presentation but possibly needed more practice. Technical knowledge was well communicated 
+I think the group seemed confident overall with well prepared material.
+Well written presentation very similar to heat transfer lab
+Should use existing equipment and methods.
 
 			---------------------------------------------------
 			Final Assignment Grade
 			---------------------------------------------------
 			Group Score + Individual Score = Overall Score
 			
-			10.00 + 10.00  = 20.00/35 
+			21.38 + 9.04  = 30.42/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Carter Allen
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 85.00%
+			Body Language: 87.65%
+			Enthusiasm: 87.65%
+			Speaking: 92.06%
+			
+			Individual Score: 90.47%
+			Individual Points: 22.62 / 25
+
+			Inidvidual Feedback Recieved: Looked directly at the computer a lot rather than at the presentation screen. Really good knowledge of every step of the derivation 
+Would recommend trying to keep hands from being in pockets as well, but overall explained math concepts well. 
+Try to make more eye contact with your audience to better engage them.
+
+			---------------------------------------------------
+			Group Scores: 301B
+			---------------------------------------------------
+			Technical: 93.53%
+			Efficacy: 89.76%
+			Completeness: 94.59%
+			Presentation Quality: 92.59%
+			Ability to Answer Questions: 93.24%
+			
+			Group Score: 92.74%
+			Group Points: 9.27 / 10
+			
+			Group Feedback Recieved: Very well presented
+Seemed practiced and all group members were knowledgeable on their respective slides
+Good job! 
+You should try to make your equations as large and readable as possible.
+Might need to model the system dynamics – i.e. use Lagrange's equation, and run the experiment in torque mode.  Also, consider ways of dealing with accelerometer noise if you use accelerometers.  
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			22.62 + 9.27  = 31.89/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Aidan Lesnik
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 94.71%
+			Body Language: 87.65%
+			Enthusiasm: 88.53%
+			Speaking: 95.59%
+			
+			Individual Score: 93.29%
+			Individual Points: 23.32 / 25
+
+			Inidvidual Feedback Recieved: Great language, enthusiasm, and knowledge. A little more eye contact with audience
+There were a few filler words, and wouldn't recommend hands be in pockets. Overall did a great job explaining everything though and seemed comfortable with the material they were covering in their presentation. 
+I would recommend taking your hands out of your pocket when presenting.  You spoke very well and clearly understand your topic.
+Try to avoid speaking with your hands in your pockets.  
+
+			---------------------------------------------------
+			Group Scores: 301B
+			---------------------------------------------------
+			Technical: 93.53%
+			Efficacy: 89.76%
+			Completeness: 94.59%
+			Presentation Quality: 92.59%
+			Ability to Answer Questions: 93.24%
+			
+			Group Score: 92.74%
+			Group Points: 9.27 / 10
+			
+			Group Feedback Recieved: Very well presented
+Seemed practiced and all group members were knowledgeable on their respective slides
+Good job! 
+You should try to make your equations as large and readable as possible.
+Might need to model the system dynamics – i.e. use Lagrange's equation, and run the experiment in torque mode.  Also, consider ways of dealing with accelerometer noise if you use accelerometers.  
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.32 + 9.27  = 32.60/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Tyson Pilla
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 97.35%
+			Body Language: 97.35%
+			Enthusiasm: 96.47%
+			Speaking: 96.47%
+			
+			Individual Score: 97.53%
+			Individual Points: 24.38 / 25
+
+			Inidvidual Feedback Recieved: Looked at the screen for a lot of the time, but still made eye contact with the audience and spoke very well. 
+He did awesome! He explained everything very well and helped explain the correlation between their math model and expected results. I appreciated the thorough explanation.
+
+			---------------------------------------------------
+			Group Scores: 301B
+			---------------------------------------------------
+			Technical: 93.53%
+			Efficacy: 89.76%
+			Completeness: 94.59%
+			Presentation Quality: 92.59%
+			Ability to Answer Questions: 93.24%
+			
+			Group Score: 92.74%
+			Group Points: 9.27 / 10
+			
+			Group Feedback Recieved: Very well presented
+Seemed practiced and all group members were knowledgeable on their respective slides
+Good job! 
+You should try to make your equations as large and readable as possible.
+Might need to model the system dynamics – i.e. use Lagrange's equation, and run the experiment in torque mode.  Also, consider ways of dealing with accelerometer noise if you use accelerometers.  
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			24.38 + 9.27  = 33.66/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Gunnar Rutherford
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 91.18%
+			Body Language: 92.94%
+			Enthusiasm: 89.41%
+			Speaking: 89.41%
+			
+			Individual Score: 92.59%
+			Individual Points: 23.15 / 25
+
+			Inidvidual Feedback Recieved: Seemed a little nervous but otherwise well presented. 
+Did a great job running through the experimental setup and showed that they did a lot of work looking into this. He didn't use filler words and did a great job explaining everything in a way that makes sense. 
+Well spoken!
+Try to speak in a more even pace, and try not to trail off in volume near the end of your sentences. 
+
+			---------------------------------------------------
+			Group Scores: 301B
+			---------------------------------------------------
+			Technical: 93.53%
+			Efficacy: 89.76%
+			Completeness: 94.59%
+			Presentation Quality: 92.59%
+			Ability to Answer Questions: 93.24%
+			
+			Group Score: 92.74%
+			Group Points: 9.27 / 10
+			
+			Group Feedback Recieved: Very well presented
+Seemed practiced and all group members were knowledgeable on their respective slides
+Good job! 
+You should try to make your equations as large and readable as possible.
+Might need to model the system dynamics – i.e. use Lagrange's equation, and run the experiment in torque mode.  Also, consider ways of dealing with accelerometer noise if you use accelerometers.  
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.15 + 9.27  = 32.42/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Anna Finley
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 94.17%
+			Body Language: 93.33%
+			Enthusiasm: 97.50%
+			Speaking: 94.17%
+			
+			Individual Score: 95.83%
+			Individual Points: 23.96 / 25
+
+			Inidvidual Feedback Recieved: Moved around a lot while speaking but great communication of information 
+Very well spoken!
+
+Did a really great job explaining the literature they referenced and explaining the concepts they're going to study. 
+
+			---------------------------------------------------
+			Group Scores: 301C
+			---------------------------------------------------
+			Technical: 90.56%
+			Efficacy: 90.28%
+			Completeness: 87.50%
+			Presentation Quality: 93.89%
+			Ability to Answer Questions: 85.83%
+			
+			Group Score: 89.61%
+			Group Points: 8.96 / 10
+			
+			Group Feedback Recieved: Well delivered presentation. Seemed practiced 
+Are you purely using the camera to measure ie counting the pixels or will there be a grid behind the drop to have a backup measurement/to double check with the camera
+For a group of 3 I was very impressed with their presentation. Everyone knew what they were talking about. The group could have done a better job explaining the actual experiment though and what they will be measuring. Their experiment takes in a lot of assumptions so it might be difficult to get an accurate model. 
+Very interesting!  
+They all did a great job explaining their proposed experiment, explained all the assumptions and findings from the study they researched, and accurately showed how each of these math models actually looks using their awesome visuals! I think that their idea to try this process with different liquids will be a good idea and I think that their results could help with furthering the research in this field! I'm really excited to see the results of their experiment!
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.96 + 8.96  = 32.92/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Madison Vieth
+			---------------------------------------------------
+			Dress Code: 90.83%
+			Audience Engagement: 95.83%
+			Body Language: 94.17%
+			Enthusiasm: 98.33%
+			Speaking: 90.83%
+			
+			Individual Score: 94.00%
+			Individual Points: 23.50 / 25
+
+			Inidvidual Feedback Recieved: Paused in a few places but knowledgeable of information
+Really great job explaining the math model they're going to prove and explained the concepts very thoroughly. It was very engaging and the visuals helped a lot! 
+
+			---------------------------------------------------
+			Group Scores: 301C
+			---------------------------------------------------
+			Technical: 90.56%
+			Efficacy: 90.28%
+			Completeness: 87.50%
+			Presentation Quality: 93.89%
+			Ability to Answer Questions: 85.83%
+			
+			Group Score: 89.61%
+			Group Points: 8.96 / 10
+			
+			Group Feedback Recieved: Well delivered presentation. Seemed practiced 
+Are you purely using the camera to measure ie counting the pixels or will there be a grid behind the drop to have a backup measurement/to double check with the camera
+For a group of 3 I was very impressed with their presentation. Everyone knew what they were talking about. The group could have done a better job explaining the actual experiment though and what they will be measuring. Their experiment takes in a lot of assumptions so it might be difficult to get an accurate model. 
+Very interesting!  
+They all did a great job explaining their proposed experiment, explained all the assumptions and findings from the study they researched, and accurately showed how each of these math models actually looks using their awesome visuals! I think that their idea to try this process with different liquids will be a good idea and I think that their results could help with furthering the research in this field! I'm really excited to see the results of their experiment!
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.50 + 8.96  = 32.46/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Henry Wilson
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 94.17%
+			Body Language: 95.83%
+			Enthusiasm: 95.00%
+			Speaking: 93.33%
+			
+			Individual Score: 95.67%
+			Individual Points: 23.92 / 25
+
+			Inidvidual Feedback Recieved: Great speaking, paused in a few places as well but not too much
+He did a really great job explaining their experimental setup and also explained the math models findings in a way that shows how the water droplets experience different necking at the drop and you can clearly see that the lower the bond number the shorter the time that it will stay suspended, but also the droplet will become more spherical as they said. 
+
+			---------------------------------------------------
+			Group Scores: 301C
+			---------------------------------------------------
+			Technical: 90.56%
+			Efficacy: 90.28%
+			Completeness: 87.50%
+			Presentation Quality: 93.89%
+			Ability to Answer Questions: 85.83%
+			
+			Group Score: 89.61%
+			Group Points: 8.96 / 10
+			
+			Group Feedback Recieved: Well delivered presentation. Seemed practiced 
+Are you purely using the camera to measure ie counting the pixels or will there be a grid behind the drop to have a backup measurement/to double check with the camera
+For a group of 3 I was very impressed with their presentation. Everyone knew what they were talking about. The group could have done a better job explaining the actual experiment though and what they will be measuring. Their experiment takes in a lot of assumptions so it might be difficult to get an accurate model. 
+Very interesting!  
+They all did a great job explaining their proposed experiment, explained all the assumptions and findings from the study they researched, and accurately showed how each of these math models actually looks using their awesome visuals! I think that their idea to try this process with different liquids will be a good idea and I think that their results could help with furthering the research in this field! I'm really excited to see the results of their experiment!
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.92 + 8.96  = 32.88/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Micah Asbill
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 86.50%
+			Body Language: 94.00%
+			Enthusiasm: 91.00%
+			Speaking: 95.50%
+			
+			Individual Score: 93.40%
+			Individual Points: 23.35 / 25
+
+			Inidvidual Feedback Recieved: Explained things in a simple and understandable way. This helped me understand what the goal of their project is and showed that they had a good idea of what was going on overall. 
+
+			---------------------------------------------------
+			Group Scores: 301D
+			---------------------------------------------------
+			Technical: 89.00%
+			Efficacy: 92.75%
+			Completeness: 89.70%
+			Presentation Quality: 88.15%
+			Ability to Answer Questions: 92.00%
+			
+			Group Score: 90.32%
+			Group Points: 9.03 / 10
+			
+			Group Feedback Recieved: Well given, good information 
+Well given, good information 
+I feel like the group could have prepared more for the presentation. They seemed unsure about a few things throughout. 
+I feel like the group could have prepared more for the presentation. They seemed unsure about a few things throughout. 
+They did a good job overall - I think the considerations that Dr. Stutts noted will be helpful when trying to find the spring constant and considering their uncertainty. 
+Looks good!  You can directly measure the spring stiffness by carefully hanging weights on it and measuring the deflection. It was pretty hard to read your slides.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.35 + 9.03  = 32.38/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Griffin Mills
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 83.50%
+			Body Language: 87.25%
+			Enthusiasm: 86.50%
+			Speaking: 77.50%
+			
+			Individual Score: 86.95%
+			Individual Points: 21.74 / 25
+
+			Inidvidual Feedback Recieved: Talked through the experiment fairly well, they had some good sections with visuals and included the assumptions again which helped! Had a little bit of a harder time explaining the setup a bit but I think that it may have been nerves - also looked at the floor a bit when explaining. Overall, he did end up explaining well, just had a couple very very minute hiccups. 
+Try your best to speak with confidence.
+Try to avoid punctuating your sentences with "ah".   Also try to make more eye contact with your audience to better engage them.   Seemed a bit nervous with halting and uneven delivery.  Maybe needed more practice? 
+
+			---------------------------------------------------
+			Group Scores: 301D
+			---------------------------------------------------
+			Technical: 89.00%
+			Efficacy: 92.75%
+			Completeness: 89.70%
+			Presentation Quality: 88.15%
+			Ability to Answer Questions: 92.00%
+			
+			Group Score: 90.32%
+			Group Points: 9.03 / 10
+			
+			Group Feedback Recieved: Well given, good information 
+Well given, good information 
+I feel like the group could have prepared more for the presentation. They seemed unsure about a few things throughout. 
+I feel like the group could have prepared more for the presentation. They seemed unsure about a few things throughout. 
+They did a good job overall - I think the considerations that Dr. Stutts noted will be helpful when trying to find the spring constant and considering their uncertainty. 
+Looks good!  You can directly measure the spring stiffness by carefully hanging weights on it and measuring the deflection. It was pretty hard to read your slides.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			21.74 + 9.03  = 30.77/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Rebekah Settles
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 91.00%
+			Body Language: 95.50%
+			Enthusiasm: 95.50%
+			Speaking: 93.25%
+			
+			Individual Score: 95.05%
+			Individual Points: 23.76 / 25
+
+			Inidvidual Feedback Recieved: Simplifying the work in the mathematical model (that they showed) may have helped with explaining their math better alongside their steps if it was a little more broken down. I think that they covered everything well, but breaking things down to more slides to show everything a little more clearly might have helped. Really good overall though and you can tell she has a solid understanding of what the experiment is hoping to find. 
+
+			---------------------------------------------------
+			Group Scores: 301D
+			---------------------------------------------------
+			Technical: 89.00%
+			Efficacy: 92.75%
+			Completeness: 89.70%
+			Presentation Quality: 88.15%
+			Ability to Answer Questions: 92.00%
+			
+			Group Score: 90.32%
+			Group Points: 9.03 / 10
+			
+			Group Feedback Recieved: Well given, good information 
+Well given, good information 
+I feel like the group could have prepared more for the presentation. They seemed unsure about a few things throughout. 
+I feel like the group could have prepared more for the presentation. They seemed unsure about a few things throughout. 
+They did a good job overall - I think the considerations that Dr. Stutts noted will be helpful when trying to find the spring constant and considering their uncertainty. 
+Looks good!  You can directly measure the spring stiffness by carefully hanging weights on it and measuring the deflection. It was pretty hard to read your slides.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.76 + 9.03  = 32.79/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Shiane Taylor
+			---------------------------------------------------
+			Dress Code: 97.75%
+			Audience Engagement: 85.00%
+			Body Language: 85.00%
+			Enthusiasm: 89.50%
+			Speaking: 80.50%
+			
+			Individual Score: 87.55%
+			Individual Points: 21.89 / 25
+
+			Inidvidual Feedback Recieved: Hands on hips while presenting. Seemed nervous which is understandable but more practice for the presentation might help with that. 
+Hands on hips while presenting. Seemed nervous which is understandable but more practice for the presentation might help with that. 
+I could tell she was a little nervous but did a great job pushing through to ensure that the material they were covering was clear to the audience.
+I would try to avoid reading off of the slides whenever possible.  You had grat energy in your speaking!
+Try to avoid the heavy sighs between sentences.  Also try to make more eye contact with your audience to better engage them.  You were mostly speaking to the computer screen.  Otherwise, good job! 
+
+			---------------------------------------------------
+			Group Scores: 301D
+			---------------------------------------------------
+			Technical: 89.00%
+			Efficacy: 92.75%
+			Completeness: 89.70%
+			Presentation Quality: 88.15%
+			Ability to Answer Questions: 92.00%
+			
+			Group Score: 90.32%
+			Group Points: 9.03 / 10
+			
+			Group Feedback Recieved: Well given, good information 
+Well given, good information 
+I feel like the group could have prepared more for the presentation. They seemed unsure about a few things throughout. 
+I feel like the group could have prepared more for the presentation. They seemed unsure about a few things throughout. 
+They did a good job overall - I think the considerations that Dr. Stutts noted will be helpful when trying to find the spring constant and considering their uncertainty. 
+Looks good!  You can directly measure the spring stiffness by carefully hanging weights on it and measuring the deflection. It was pretty hard to read your slides.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			21.89 + 9.03  = 30.92/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Austin Boyd
+			---------------------------------------------------
+			Dress Code: 90.71%
+			Audience Engagement: 92.14%
+			Body Language: 92.14%
+			Enthusiasm: 94.29%
+			Speaking: 91.43%
+			
+			Individual Score: 92.14%
+			Individual Points: 23.04 / 25
+
+			Inidvidual Feedback Recieved: Good job catching your mistake and restarting.
+Breathe calm down and gather your thoughts. you are very knowledgeable on this
+Try not to punctuate your sentences with "ah."   Note that sin , cos, tan, etc. are not italicized.
+
+			---------------------------------------------------
+			Group Scores: 303A
+			---------------------------------------------------
+			Technical: 86.67%
+			Efficacy: 84.29%
+			Completeness: 88.57%
+			Presentation Quality: 88.33%
+			Ability to Answer Questions: 79.05%
+			
+			Group Score: 85.38%
+			Group Points: 8.54 / 10
+			
+			Group Feedback Recieved: Good. All the content is there as far as I can tell in the audience, however, there is overall a lack of enthusiasm. Regardless, good technical presentation and the cam demonstration was a nice visual aid. 
+Nice animation, it was an excellent addition to the presentation to help us see what you were planning on making.
+Feel like there was a lot of information that was left out for the experiment you wanted to complete.
+Maybe a stepper motor with a digital interface for modulation would be better than a drill
+Video is intended to be used as a main measuring equipment. Suggestion has been made to use digital encoder to measure the cam speed. Presentation was well overall.
+Depth of the presentation could be greater.
+Seems pretty simplistic.  Angular velocity may not be constant.  Need to find out if visual tracking software will work, etc.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.04 + 8.54  = 31.57/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Joshua Pesek
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 91.43%
+			Body Language: 90.00%
+			Enthusiasm: 90.00%
+			Speaking: 91.43%
+			
+			Individual Score: 92.57%
+			Individual Points: 23.14 / 25
+
+			Inidvidual Feedback Recieved: Try not to punctuate your sentences with "ah."  
+
+			---------------------------------------------------
+			Group Scores: 303A
+			---------------------------------------------------
+			Technical: 86.67%
+			Efficacy: 84.29%
+			Completeness: 88.57%
+			Presentation Quality: 88.33%
+			Ability to Answer Questions: 79.05%
+			
+			Group Score: 85.38%
+			Group Points: 8.54 / 10
+			
+			Group Feedback Recieved: Good. All the content is there as far as I can tell in the audience, however, there is overall a lack of enthusiasm. Regardless, good technical presentation and the cam demonstration was a nice visual aid. 
+Nice animation, it was an excellent addition to the presentation to help us see what you were planning on making.
+Feel like there was a lot of information that was left out for the experiment you wanted to complete.
+Maybe a stepper motor with a digital interface for modulation would be better than a drill
+Video is intended to be used as a main measuring equipment. Suggestion has been made to use digital encoder to measure the cam speed. Presentation was well overall.
+Depth of the presentation could be greater.
+Seems pretty simplistic.  Angular velocity may not be constant.  Need to find out if visual tracking software will work, etc.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.14 + 8.54  = 31.68/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Christian Rosales
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 86.43%
+			Body Language: 87.14%
+			Enthusiasm: 90.00%
+			Speaking: 87.86%
+			
+			Individual Score: 90.29%
+			Individual Points: 22.57 / 25
+
+			Inidvidual Feedback Recieved: Try to make more eye contact with your audience to better engage them.  Try not to speak to the projector screen.
+
+			---------------------------------------------------
+			Group Scores: 303A
+			---------------------------------------------------
+			Technical: 86.67%
+			Efficacy: 84.29%
+			Completeness: 88.57%
+			Presentation Quality: 88.33%
+			Ability to Answer Questions: 79.05%
+			
+			Group Score: 85.38%
+			Group Points: 8.54 / 10
+			
+			Group Feedback Recieved: Good. All the content is there as far as I can tell in the audience, however, there is overall a lack of enthusiasm. Regardless, good technical presentation and the cam demonstration was a nice visual aid. 
+Nice animation, it was an excellent addition to the presentation to help us see what you were planning on making.
+Feel like there was a lot of information that was left out for the experiment you wanted to complete.
+Maybe a stepper motor with a digital interface for modulation would be better than a drill
+Video is intended to be used as a main measuring equipment. Suggestion has been made to use digital encoder to measure the cam speed. Presentation was well overall.
+Depth of the presentation could be greater.
+Seems pretty simplistic.  Angular velocity may not be constant.  Need to find out if visual tracking software will work, etc.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			22.57 + 8.54  = 31.11/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Matthew Stornello
+			---------------------------------------------------
+			Dress Code: 96.43%
+			Audience Engagement: 90.71%
+			Body Language: 95.00%
+			Enthusiasm: 93.57%
+			Speaking: 94.29%
+			
+			Individual Score: 94.00%
+			Individual Points: 23.50 / 25
+
+			Inidvidual Feedback Recieved: engage with the audience more with your eyes. Great figures
+Facing away a little too much but that is it
+Try to make more eye contact with your audience to better engage them.
+
+			---------------------------------------------------
+			Group Scores: 303A
+			---------------------------------------------------
+			Technical: 86.67%
+			Efficacy: 84.29%
+			Completeness: 88.57%
+			Presentation Quality: 88.33%
+			Ability to Answer Questions: 79.05%
+			
+			Group Score: 85.38%
+			Group Points: 8.54 / 10
+			
+			Group Feedback Recieved: Good. All the content is there as far as I can tell in the audience, however, there is overall a lack of enthusiasm. Regardless, good technical presentation and the cam demonstration was a nice visual aid. 
+Nice animation, it was an excellent addition to the presentation to help us see what you were planning on making.
+Feel like there was a lot of information that was left out for the experiment you wanted to complete.
+Maybe a stepper motor with a digital interface for modulation would be better than a drill
+Video is intended to be used as a main measuring equipment. Suggestion has been made to use digital encoder to measure the cam speed. Presentation was well overall.
+Depth of the presentation could be greater.
+Seems pretty simplistic.  Angular velocity may not be constant.  Need to find out if visual tracking software will work, etc.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.50 + 8.54  = 32.04/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Andrew Dutton
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 95.50%
+			Body Language: 95.50%
+			Enthusiasm: 89.50%
+			Speaking: 98.50%
+			
+			Individual Score: 95.80%
+			Individual Points: 23.95 / 25
+
+			Inidvidual Feedback Recieved: 
+
+			---------------------------------------------------
+			Group Scores: 303B
+			---------------------------------------------------
+			Technical: 95.00%
+			Efficacy: 92.50%
+			Completeness: 93.50%
+			Presentation Quality: 94.25%
+			Ability to Answer Questions: 95.00%
+			
+			Group Score: 94.05%
+			Group Points: 9.40 / 10
+			
+			Group Feedback Recieved: It is best to state what is measured and why. Presentation is good overall, but that key element was missing. Good project.
+Presentation was presented very well. The information and mathematical model given seems to be very thorough, however, I am not versed enough in the subject to provide technical feedback. 
+Somewhat simplistic model, but very challenging and precise machining required.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.95 + 9.40  = 33.35/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Marcus Kjar
+			---------------------------------------------------
+			Dress Code: 97.75%
+			Audience Engagement: 89.50%
+			Body Language: 82.00%
+			Enthusiasm: 86.76%
+			Speaking: 85.00%
+			
+			Individual Score: 88.25%
+			Individual Points: 22.06 / 25
+
+			Inidvidual Feedback Recieved: Touched his arm the entire time and swayed
+Probably needed a bit more practice.  
+
+			---------------------------------------------------
+			Group Scores: 303B
+			---------------------------------------------------
+			Technical: 95.00%
+			Efficacy: 92.50%
+			Completeness: 93.50%
+			Presentation Quality: 94.25%
+			Ability to Answer Questions: 95.00%
+			
+			Group Score: 94.05%
+			Group Points: 9.40 / 10
+			
+			Group Feedback Recieved: It is best to state what is measured and why. Presentation is good overall, but that key element was missing. Good project.
+Presentation was presented very well. The information and mathematical model given seems to be very thorough, however, I am not versed enough in the subject to provide technical feedback. 
+Somewhat simplistic model, but very challenging and precise machining required.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			22.06 + 9.40  = 31.47/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Eric Lindsay
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 94.75%
+			Body Language: 94.00%
+			Enthusiasm: 91.75%
+			Speaking: 97.00%
+			
+			Individual Score: 95.50%
+			Individual Points: 23.88 / 25
+
+			Inidvidual Feedback Recieved: 
+
+			---------------------------------------------------
+			Group Scores: 303B
+			---------------------------------------------------
+			Technical: 95.00%
+			Efficacy: 92.50%
+			Completeness: 93.50%
+			Presentation Quality: 94.25%
+			Ability to Answer Questions: 95.00%
+			
+			Group Score: 94.05%
+			Group Points: 9.40 / 10
+			
+			Group Feedback Recieved: It is best to state what is measured and why. Presentation is good overall, but that key element was missing. Good project.
+Presentation was presented very well. The information and mathematical model given seems to be very thorough, however, I am not versed enough in the subject to provide technical feedback. 
+Somewhat simplistic model, but very challenging and precise machining required.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.88 + 9.40  = 33.28/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Henry Witte
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 84.25%
+			Body Language: 88.00%
+			Enthusiasm: 97.00%
+			Speaking: 93.25%
+			
+			Individual Score: 92.50%
+			Individual Points: 23.12 / 25
+
+			Inidvidual Feedback Recieved: I think this was an excellent discussion of the math.  Nice work!
+Try to make more eye contact with your audience to better engage them.
+
+			---------------------------------------------------
+			Group Scores: 303B
+			---------------------------------------------------
+			Technical: 95.00%
+			Efficacy: 92.50%
+			Completeness: 93.50%
+			Presentation Quality: 94.25%
+			Ability to Answer Questions: 95.00%
+			
+			Group Score: 94.05%
+			Group Points: 9.40 / 10
+			
+			Group Feedback Recieved: It is best to state what is measured and why. Presentation is good overall, but that key element was missing. Good project.
+Presentation was presented very well. The information and mathematical model given seems to be very thorough, however, I am not versed enough in the subject to provide technical feedback. 
+Somewhat simplistic model, but very challenging and precise machining required.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.12 + 9.40  = 32.53/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Josiah Bond
+			---------------------------------------------------
+			Dress Code: 94.38%
+			Audience Engagement: 88.12%
+			Body Language: 88.75%
+			Enthusiasm: 86.88%
+			Speaking: 85.00%
+			
+			Individual Score: 88.62%
+			Individual Points: 22.16 / 25
+
+			Inidvidual Feedback Recieved: Speak in certainties rather than probablies
+The dress code is important when it is loose it takes away from your credibility. You used more filler words than others but did recover quickly. Otherwise very good.   
+
+			---------------------------------------------------
+			Group Scores: 303C
+			---------------------------------------------------
+			Technical: 94.83%
+			Efficacy: 88.92%
+			Completeness: 94.17%
+			Presentation Quality: 90.62%
+			Ability to Answer Questions: 92.04%
+			
+			Group Score: 92.12%
+			Group Points: 9.21 / 10
+			
+			Group Feedback Recieved: Overall good presentation. Intense theory that did not completely stick with me, however it was presented extremely well with each presenter addressing the crowd well.
+Good overall presentation, great visuals, slides had too many words, Took longer than expected
+Seemed like Lucia and Klajdi performed most of the presentation 
+Overall a well constructed and given presentation. Slides are a bit wordy and lowers the readability however this seems to be justified due to the amount of information that you needed to include. When over on time by a bit.
+Great visuals, and presenters, but lots of very wordy slides and some slides are hard to read. A little difficult to understand what exactly you are measuring but I may have missed something.  
+Outstanding presentation. 
+Lots of details to work out!  Precision will be key!
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			22.16 + 9.21  = 31.37/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Klajdi Hysenaj
+			---------------------------------------------------
+			Dress Code: 92.50%
+			Audience Engagement: 95.62%
+			Body Language: 95.62%
+			Enthusiasm: 92.50%
+			Speaking: 93.12%
+			
+			Individual Score: 93.88%
+			Individual Points: 23.47 / 25
+
+			Inidvidual Feedback Recieved: Again, engaging and understands content completely. 
+Hard to understand slides for someone who is not well versed in the experiment
+Tie not all the way up
+Great use of animations, it was super helpful to visualize what is happening. Great job discussing your math.
+The tie is important when it is loose it takes away from your credibility. otherwise excellent.  
+
+			---------------------------------------------------
+			Group Scores: 303C
+			---------------------------------------------------
+			Technical: 94.83%
+			Efficacy: 88.92%
+			Completeness: 94.17%
+			Presentation Quality: 90.62%
+			Ability to Answer Questions: 92.04%
+			
+			Group Score: 92.12%
+			Group Points: 9.21 / 10
+			
+			Group Feedback Recieved: Overall good presentation. Intense theory that did not completely stick with me, however it was presented extremely well with each presenter addressing the crowd well.
+Good overall presentation, great visuals, slides had too many words, Took longer than expected
+Seemed like Lucia and Klajdi performed most of the presentation 
+Overall a well constructed and given presentation. Slides are a bit wordy and lowers the readability however this seems to be justified due to the amount of information that you needed to include. When over on time by a bit.
+Great visuals, and presenters, but lots of very wordy slides and some slides are hard to read. A little difficult to understand what exactly you are measuring but I may have missed something.  
+Outstanding presentation. 
+Lots of details to work out!  Precision will be key!
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.47 + 9.21  = 32.68/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Lucia Rogers
+			---------------------------------------------------
+			Dress Code: 98.75%
+			Audience Engagement: 98.12%
+			Body Language: 94.13%
+			Enthusiasm: 95.62%
+			Speaking: 97.50%
+			
+			Individual Score: 96.85%
+			Individual Points: 24.21 / 25
+
+			Inidvidual Feedback Recieved: Enthusiastic and not looking at slides 
+Make sure you’re keeping eye contact with the audience. You were very intentional with words. 
+Excellent presenting, few filler words, quick recoveries 
+
+			---------------------------------------------------
+			Group Scores: 303C
+			---------------------------------------------------
+			Technical: 94.83%
+			Efficacy: 88.92%
+			Completeness: 94.17%
+			Presentation Quality: 90.62%
+			Ability to Answer Questions: 92.04%
+			
+			Group Score: 92.12%
+			Group Points: 9.21 / 10
+			
+			Group Feedback Recieved: Overall good presentation. Intense theory that did not completely stick with me, however it was presented extremely well with each presenter addressing the crowd well.
+Good overall presentation, great visuals, slides had too many words, Took longer than expected
+Seemed like Lucia and Klajdi performed most of the presentation 
+Overall a well constructed and given presentation. Slides are a bit wordy and lowers the readability however this seems to be justified due to the amount of information that you needed to include. When over on time by a bit.
+Great visuals, and presenters, but lots of very wordy slides and some slides are hard to read. A little difficult to understand what exactly you are measuring but I may have missed something.  
+Outstanding presentation. 
+Lots of details to work out!  Precision will be key!
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			24.21 + 9.21  = 33.42/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Ryan Schrick
+			---------------------------------------------------
+			Dress Code: 91.88%
+			Audience Engagement: 94.38%
+			Body Language: 93.12%
+			Enthusiasm: 97.50%
+			Speaking: 95.62%
+			
+			Individual Score: 94.50%
+			Individual Points: 23.62 / 25
+
+			Inidvidual Feedback Recieved: Clear and quick
+Very solid discussion, you sopke with great confidence.
+Excellent 
+
+			---------------------------------------------------
+			Group Scores: 303C
+			---------------------------------------------------
+			Technical: 94.83%
+			Efficacy: 88.92%
+			Completeness: 94.17%
+			Presentation Quality: 90.62%
+			Ability to Answer Questions: 92.04%
+			
+			Group Score: 92.12%
+			Group Points: 9.21 / 10
+			
+			Group Feedback Recieved: Overall good presentation. Intense theory that did not completely stick with me, however it was presented extremely well with each presenter addressing the crowd well.
+Good overall presentation, great visuals, slides had too many words, Took longer than expected
+Seemed like Lucia and Klajdi performed most of the presentation 
+Overall a well constructed and given presentation. Slides are a bit wordy and lowers the readability however this seems to be justified due to the amount of information that you needed to include. When over on time by a bit.
+Great visuals, and presenters, but lots of very wordy slides and some slides are hard to read. A little difficult to understand what exactly you are measuring but I may have missed something.  
+Outstanding presentation. 
+Lots of details to work out!  Precision will be key!
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.62 + 9.21  = 32.84/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Zachary Maxwell
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 92.14%
+			Body Language: 93.57%
+			Enthusiasm: 96.43%
+			Speaking: 89.29%
+			
+			Individual Score: 94.29%
+			Individual Points: 23.57 / 25
+
+			Inidvidual Feedback Recieved: Excellent, but speak to your audience, we are all familiar with technical language. 
+
+			---------------------------------------------------
+			Group Scores: 303D
+			---------------------------------------------------
+			Technical: 85.48%
+			Efficacy: 88.81%
+			Completeness: 92.67%
+			Presentation Quality: 92.10%
+			Ability to Answer Questions: 94.10%
+			
+			Group Score: 90.63%
+			Group Points: 9.06 / 10
+			
+			Group Feedback Recieved: Excellent presentation
+Very simple project.
+Font too small.  How will you make sure the temperature is uniform in the fluid?  Very simple concept.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.57 + 9.06  = 32.63/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Seth Nolte
+			---------------------------------------------------
+			Dress Code: 99.29%
+			Audience Engagement: 93.57%
+			Body Language: 91.43%
+			Enthusiasm: 97.14%
+			Speaking: 92.14%
+			
+			Individual Score: 94.71%
+			Individual Points: 23.68 / 25
+
+			Inidvidual Feedback Recieved: Excellent
+
+			---------------------------------------------------
+			Group Scores: 303D
+			---------------------------------------------------
+			Technical: 85.48%
+			Efficacy: 88.81%
+			Completeness: 92.67%
+			Presentation Quality: 92.10%
+			Ability to Answer Questions: 94.10%
+			
+			Group Score: 90.63%
+			Group Points: 9.06 / 10
+			
+			Group Feedback Recieved: Excellent presentation
+Very simple project.
+Font too small.  How will you make sure the temperature is uniform in the fluid?  Very simple concept.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.68 + 9.06  = 32.74/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: William Rix
+			---------------------------------------------------
+			Dress Code: 100.00%
+			Audience Engagement: 86.43%
+			Body Language: 94.29%
+			Enthusiasm: 95.71%
+			Speaking: 93.57%
+			
+			Individual Score: 94.00%
+			Individual Points: 23.50 / 25
+
+			Inidvidual Feedback Recieved: Excellent
+There is no Capstan's equation.   See: https://en.wikipedia.org/wiki/Capstan_(nautical)
+
+			---------------------------------------------------
+			Group Scores: 303D
+			---------------------------------------------------
+			Technical: 85.48%
+			Efficacy: 88.81%
+			Completeness: 92.67%
+			Presentation Quality: 92.10%
+			Ability to Answer Questions: 94.10%
+			
+			Group Score: 90.63%
+			Group Points: 9.06 / 10
+			
+			Group Feedback Recieved: Excellent presentation
+Very simple project.
+Font too small.  How will you make sure the temperature is uniform in the fluid?  Very simple concept.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.50 + 9.06  = 32.56/35 
+			
+
+
+			---------------------------------------------------
+			Individual Scores: Ethan Spirer
+			---------------------------------------------------
+			Dress Code: 99.29%
+			Audience Engagement: 89.29%
+			Body Language: 91.43%
+			Enthusiasm: 95.71%
+			Speaking: 92.86%
+			
+			Individual Score: 93.71%
+			Individual Points: 23.43 / 25
+
+			Inidvidual Feedback Recieved: Excellent
+
+			---------------------------------------------------
+			Group Scores: 303D
+			---------------------------------------------------
+			Technical: 85.48%
+			Efficacy: 88.81%
+			Completeness: 92.67%
+			Presentation Quality: 92.10%
+			Ability to Answer Questions: 94.10%
+			
+			Group Score: 90.63%
+			Group Points: 9.06 / 10
+			
+			Group Feedback Recieved: Excellent presentation
+Very simple project.
+Font too small.  How will you make sure the temperature is uniform in the fluid?  Very simple concept.
+
+			---------------------------------------------------
+			Final Assignment Grade
+			---------------------------------------------------
+			Group Score + Individual Score = Overall Score
+			
+			23.43 + 9.06  = 32.49/35 
 			
 

@@ -33,9 +33,9 @@ class Grader:
 
 
 		
-	def grade_prop(self,):
+	def grade_prop(self,database):
 		#write response to Proposal database
-		ref = db.reference("Test")
+		ref = db.reference(database)
 		responses = ref.get()
 
 		for key,response in responses.items(): 
@@ -125,8 +125,7 @@ class Grader:
 			Individual Score: {individual_score_normalized*100:.2f}%
 			Individual Points: {individual_score_normalized*25:.2f} / 25
 
-			Inidvidual Feedback Recieved: {"\n".join(ind_scores["written_feedback"])}
-
+			Inidvidual Feedback Recieved: {"\n-" + "\n-".join(ind_scores["written_feedback"])} 
 			---------------------------------------------------
 			Group Scores: {group_name}
 			---------------------------------------------------
@@ -139,17 +138,18 @@ class Grader:
 			Group Score: {group_score_normalized*100:.2f}%
 			Group Points: {group_score_normalized*10:.2f} / 10
 			
-			Group Feedback Recieved: {"\n".join(group_scores["written_feedback"])}
-
+			Group Feedback Recieved: {"\n-" +"\n-".join(group_scores["written_feedback"])}
 			---------------------------------------------------
 			Final Assignment Grade
 			---------------------------------------------------
 			Group Score + Individual Score = Overall Score
 			
-			{individual_score_normalized*25:.2f} + {group_score_normalized*10:.2f}  = {overall_score:.2f}/35 
+			{individual_score_normalized*25:.2f} + {group_score_normalized*10:.2f}  = {overall_score:.2f}/35 ----> {overall_score*100/35:.2f}%\n
+
 			"""
 
 			self.proposal_gradebook[student] = [overall_score,text_feedback]
+		return self.proposal_gradebook
 
 
 	def create_groups(self,):
@@ -297,8 +297,9 @@ class Grader:
 if __name__ == "__main__":
 	grad = Grader()
 	#grad.organize_responses()
+	database = 'Proposal_Response2'
 	grad.organize_responses()
-	grad.grade_prop()
+	grad.grade_prop(database)
 	# for student,values in grad.proposal_gradebook.items():
 	# 	print(values[1])
 
@@ -309,6 +310,6 @@ if __name__ == "__main__":
 		
 		print(grad.proposal_gradebook[student][1])
 		print('\n')
-	with open("proposal_grades.txt", "w") as f:
-		for student in grad.proposal_gradebook.keys():
-			f.write(str(grad.proposal_gradebook[student][1]) + "\n\n")
+	# with open("proposal_grades.txt", "w") as f:
+	# 	for student in grad.proposal_gradebook.keys():
+	# 		f.write(str(grad.proposal_gradebook[student][1]) + "\n\n")

@@ -1,12 +1,13 @@
-from grader import Grader
+from grader_firebase import Grader
 from canvas_tools import CanvasTool
 import time
 
 grad = Grader()
 grad.organize_responses()
 
+database_name = 'Proposal_Response3'
 #proposal grades in form {student:[grade,text feedback]}
-proposal_grades = grad.grade_proposal()
+proposal_grades = grad.grade_prop(database_name)
 
 mycanvas = CanvasTool()
 mycanvas.find_student_data()
@@ -25,7 +26,7 @@ for student in proposal_grades.keys():
 	else:
 		print(f'could not find {student} in course')
 
-assignment_id = 3246434
+assignment_id = 3130608
 start = time.time()
 
 mycanvas.upload_bulk_grades(assignment_id,grades)
