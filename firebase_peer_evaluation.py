@@ -30,7 +30,7 @@ def login_screen():
 def all_scores_filled(dict1):
 	scored_filled = True
 	for key in dict1.keys():
-		if dict1[key] == None:
+		if dict1[key] == None or dict1[key] == '':
 			scored_filled = False
 	return scored_filled
 
@@ -56,11 +56,10 @@ for entry in st.secrets["class_list"]["students"]:
 	student_dict[email_id]['name'] = name
 					
 
-def is_allowed(sign_in_email: str) -> bool:
+def is_allowed(sign_in_id: str) -> bool:
 	is_allowed = False
-	sign_in_email = sign_in_email.split('@')[0]
 	for email_id in student_dict.keys():
-		if sign_in_email == email_id:
+		if email_id == sign_in_id:
 			is_allowed = True
 	return is_allowed
 
@@ -76,6 +75,8 @@ students_by_section = {
 def show_review_prompt():
 	# fixed quoting inside f-string below
 	st.success(f"Thanks for your feedback {st.session_state['active_user'].split(' ')[0]}! Your responses have been recorded.")
+	time.sleep(3)
+	st.session_state.closed = True
 
 def init_firebase():
 	# Only initialize once
@@ -92,13 +93,12 @@ ref = db.reference("Midterm_Peer_Evaluations")
 if st.user.is_logged_in:
 	# Safely extract claims (st.user is dict-like)
 	sign_in_dict = dict(st.user)
-	sign_in_id = sign_in_dict.get("email")
-	sign_in_email = sign_in_dict.get("email").split('@')[0]
+	sign_in_id = sign_in_dict.get("email").split('@')[0]
 	sign_in_name = sign_in_dict.get("name", "User")
 	st.write(sign_in_id)
 
 	if is_allowed(sign_in_id):
-		st.success(f"You are successfully logged in, {name}.")
+		st.success(f"You are successfully logged in, {sign_in_name}.")
 		####Begin UI Here
 		st.title("ME4842 Proposal Presentation Feedback")
 		st.header("Student Identification")
@@ -107,9 +107,9 @@ if st.user.is_logged_in:
 
 		#user identification, must be sequential
 		# section_dropdown = st.selectbox("Select your section",options=["Click to Select"] + list(students_by_section.keys()),key='active_section')
-		st.session_state['active_section'] = student_dict[email_id]['section']
-		st.session_state['active_group'] = student_dict[email_id]['group']
-		st.session_state['active_user'] = student_dict[email_id]['name']
+		st.session_state['active_section'] = student_dict[sign_in_id]['section']
+		st.session_state['active_group'] = student_dict[sign_in_id]['group']
+		st.session_state['active_user'] = student_dict[sign_in_id]['name']
 		
 		st.markdown(f'#### Your Name: :green[{st.session_state['active_user']}]')
 		st.markdown(f'#### Your Group: :green[{st.session_state['active_group']}]')
@@ -163,8 +163,10 @@ if st.user.is_logged_in:
 				if st.button("Submit Feedback", disabled = not is_complete):
 					for ind_response in ind_scores:
 						ref.push(ind_response)
+					show_review_prompt()
+					
 	else:
-		st.error(f"Access denied for {sign_in_email or 'unknown user'}.")
+		st.error(f"Access denied for {sign_in_id or 'unknown user'}.")
 		st.button("Log out", on_click=st.logout)
 else:
 	login_screen()
