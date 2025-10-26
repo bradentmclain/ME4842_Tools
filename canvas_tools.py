@@ -42,12 +42,14 @@ class CanvasTool:
 			for enrollment in enrollments:
 				user = enrollment.user
 				student_name = user['name']
-				self.student_data.update({student_name:[user['id'],section_name,'None']})
+				email_id = user['login_id']
+				self.student_data.update({student_name:[user['id'],section_name,'None',email_id]})
 		#add students to groups
 		for group in self.groups:
 			members = group.get_users()
 			for member in members:
 				self.student_data[member.name][2]= group.name
+		
 
 
 	def print_survey_config(self):
@@ -57,7 +59,8 @@ class CanvasTool:
 		for student in self.student_data:
 			section = self.student_data[student][1].split('-')[-1]
 			group = self.student_data[student][2].replace(" ","")
-			print(f'"{section},{group},{student}",')
+			email_id = self.student_data[student][3]
+			print(f'"{section},{group},{student},{email_id}",')
 		print(']')
 
 	def print_student_emails(self):
@@ -157,7 +160,8 @@ if __name__ == "__main__":
 	#mycanvas.upload_groups()
 	#print(mycanvas.student_data)
 	#mycanvas.print_student_emails()
-	mycanvas.print_student_emails()
+	#mycanvas.print_student_emails()
+	mycanvas.print_survey_config()
 
 	#print(mycanvas.student_data)
 	# print('uploading assignment')

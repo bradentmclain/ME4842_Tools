@@ -5,7 +5,7 @@ import time
 grad = Grader()
 grad.organize_responses()
 
-database_name = 'Proposal_Response3'
+database_name = 'Proposal_Response4'
 #proposal grades in form {student:[grade,text feedback]}
 proposal_grades = grad.grade_prop(database_name)
 

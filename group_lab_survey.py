@@ -27,8 +27,8 @@ if "active_user" not in st.session_state:
 nested = defaultdict(lambda: defaultdict(list))
 
 for entry in st.secrets["class_list"]["students"]:
-	sec, grp, nm = entry.split(",", 2)
-	sec, grp, nm = sec.strip(), grp.strip(), nm.strip()
+	sec, grp, nm, email = entry.split(",", 2)
+	sec, grp, nm, email = sec.strip(), grp.strip(), nm.strip()
 	nested[sec][grp].append(nm)
 
 students_by_section_group = {s: dict(groups) for s, groups in nested.items()}
