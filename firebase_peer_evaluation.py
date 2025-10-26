@@ -95,6 +95,7 @@ if st.user.is_logged_in:
 	sign_in_id = sign_in_dict.get("email")
 	sign_in_email = sign_in_dict.get("email").split('@')[0]
 	sign_in_name = sign_in_dict.get("name", "User")
+	st.write(sign_in_id)
 
 	if is_allowed(sign_in_id):
 		st.success(f"You are successfully logged in, {name}.")
