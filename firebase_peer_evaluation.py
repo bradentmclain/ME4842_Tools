@@ -136,13 +136,13 @@ if st.user.is_logged_in:
 					st.subheader(f"**Score {'Yourself' if student == st.session_state.active_user else student}:**")
 					
 					st.markdown(f"##### Evaluation of {'your' if student == st.session_state.active_user else student+"'s"} participation during the three standard lab experiments")
-					labs = st.number_input(f"How much this person contributed to the three standard lab experiments. 0 = 0% contribution, 5 = full equivalent contribution for team size.", key=f"labs_{student}", min_value=0.0, max_value=5.0, step=0.1, format="%.1f", value=None)
+					labs = st.number_input(f"How much this person contributed to the three standard lab experiments on a scale from 0 to 5. 0 is no contribution, 5 is full expected individual contribution.", key=f"labs_{student}", min_value=0.0, max_value=5.0, step=0.1, format="%.1f", value=None)
 					st.markdown(f"##### Evaluation of {'your' if student == st.session_state.active_user else student+"'s"} contribution to Memo 2 and Memo 3"); 
-					memos = st.number_input(f"How much work this person contributed to the group memo assignments. 0 = 0% contribution, 5 = full equivalent contribution for team size.", key=f"memos_{student}", min_value=0.0, max_value=5.0, step=0.1, format="%.1f", value=None)
+					memos = st.number_input(f"How much work this person contributed to the group memo assignments on a scale from 0 to 5. 0 is no contribution, 5 is full expected individual contribution.", key=f"memos_{student}", min_value=0.0, max_value=5.0, step=0.1, format="%.1f", value=None)
 					st.markdown(f"##### Evaluation of {'your' if student == st.session_state.active_user else student+"'s"} participation during group discussions and meetings"); 
-					meetings = st.number_input(f"How much this person contributed to the group discussions and meetings. 0 = 0% contribution, 5 = full equivalent contribution for team size.", key=f"meetings_{student}", min_value=0.0, max_value=5.0, step=0.1, format="%.1f", value=None)
+					meetings = st.number_input(f"How much this person contributed to the group discussions and meetings on a scale from 0 to 5. 0 is no contribution, 5 is full expected individual contribution.", key=f"meetings_{student}", min_value=0.0, max_value=5.0, step=0.1, format="%.1f", value=None)
 					st.markdown(f"##### Evaluation of {'your' if student == st.session_state.active_user else student+"'s"} work on the Final Experiment materials and project"); 
-					final_project = st.number_input(f"How much this person contributed on the Final Experiment Proposal Presentation, inital concept generation, and concept generation revision. 0 = 0% contribution, 5 = full equivalent contribution for team size.", key=f"final_{student}", min_value=0.0, max_value=5.0, step=0.1, format="%.1f", value=None)
+					final_project = st.number_input(f"How much this person contributed on the Final Experiment Proposal Presentation, inital concept generation, and concept generation revision on a scale from 0 to 5. 0 is no contribution, 5 is full expected individual contribution.", key=f"final_{student}", min_value=0.0, max_value=5.0, step=0.1, format="%.1f", value=None)
 					st.markdown(f"##### Written evaluation of {'your' if student == st.session_state.active_user else student+"'s"} work so far this semester."); 
 					comments = st.text_area(f"Summarize the details of this persons work and contributions to the ME4842 group.", key=f"comments{student}")
 
