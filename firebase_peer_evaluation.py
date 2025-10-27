@@ -21,17 +21,21 @@ if "dialog_completed" not in st.session_state:
 
 if "active_group" not in st.session_state:
 	st.session_state.active_group = "Click to Select"
+
+if "awaiting_confirm" not in st.session_state:
+	st.session_state.awaiting_confirm = False
 	
 def login_screen():
 	st.header("This app is private.")
 	st.subheader("Please log in.")
 	st.button("Log in with Google", on_click=st.login)
 
-def all_scores_filled(dict1):
+def all_scores_filled(ind_scores):
 	scored_filled = True
-	for key in dict1.keys():
-		if dict1[key] == None or dict1[key] == '':
-			scored_filled = False
+	for response_dict in ind_scores:
+		for key in response_dict.keys():
+			if response_dict[key] == None or response_dict[key] == '':
+				scored_filled = False
 	return scored_filled
 
 
@@ -75,8 +79,6 @@ students_by_section = {
 def show_review_prompt():
 	# fixed quoting inside f-string below
 	st.success(f"Thanks for your feedback {st.session_state['active_user'].split(' ')[0]}! Your responses have been recorded.")
-	time.sleep(3)
-	st.session_state.closed = True
 
 def init_firebase():
 	# Only initialize once
@@ -95,9 +97,9 @@ if st.user.is_logged_in:
 	sign_in_dict = dict(st.user)
 	sign_in_id = sign_in_dict.get("email").split('@')[0]
 	sign_in_name = sign_in_dict.get("name", "User")
-	st.write(sign_in_id)
 
 	if is_allowed(sign_in_id):
+		
 		st.success(f"You are successfully logged in, {sign_in_name}.")
 		####Begin UI Here
 		st.title("ME4842 Proposal Presentation Feedback")
@@ -110,9 +112,11 @@ if st.user.is_logged_in:
 		st.session_state['active_section'] = student_dict[sign_in_id]['section']
 		st.session_state['active_group'] = student_dict[sign_in_id]['group']
 		st.session_state['active_user'] = student_dict[sign_in_id]['name']
+
+		ref = db.reference(f"Midterm_Peer_Evaluations/{st.session_state['active_user']}")
 		
-		st.markdown(f'#### Your Name: :green[{st.session_state['active_user']}]')
-		st.markdown(f'#### Your Group: :green[{st.session_state['active_group']}]')
+		st.markdown(f'#### Your Name: :green[{st.session_state["active_user"]}]')
+		st.markdown(f'#### Your Group: :green[{st.session_state["active_group"]}]')
 		st.write(f'If this is incorrect please contact Braden at btmywv@mst.edu')
 		# ------- Name selection with "I am an instructor" flow + passphrase (persistent) -------
 		# if st.session_state['active_section'] != 'Click to Select':
@@ -145,7 +149,7 @@ if st.user.is_logged_in:
 					ind_feedback_dict = {
 						"response_type":'Individual',
 						"active_user": st.session_state.active_user,
-						"reviewee": student,
+						"student_being_reviewed": student,
 						"labs": labs,
 						"memos_score": memos,
 						"meetings_score": meetings,
@@ -156,15 +160,27 @@ if st.user.is_logged_in:
 
 				#group survey question
 
-				is_complete = all_scores_filled(ind_feedback_dict)
+				is_complete = all_scores_filled(ind_scores)
 				#on data submission
 				if not is_complete:
 					st.write('Please complete all required fields before submitting.')
 				if st.button("Submit Feedback", disabled = not is_complete):
-					for ind_response in ind_scores:
-						ref.push(ind_response)
-					show_review_prompt()
-					
+					if not st.session_state.awaiting_confirm:
+						if ref.get():
+							st.session_state.awaiting_confirm = True
+						else:
+							for ind_response in ind_scores:
+								ref.push(ind_response)
+							show_review_prompt()
+
+				if st.session_state.awaiting_confirm:
+					st.warning("It looks like you have already submitted feedback for this survey. Would you like to overwrite your previous submission? If not you may close the page.")
+					if st.button('Confirm'):
+						ref.delete()
+						for ind_response in ind_scores:
+							ref.push(ind_response)
+						show_review_prompt()
+						
 	else:
 		st.error(f"Access denied for {sign_in_id or 'unknown user'}.")
 		st.button("Log out", on_click=st.logout)

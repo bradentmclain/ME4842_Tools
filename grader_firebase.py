@@ -31,8 +31,67 @@ class Grader:
 			cred = credentials.Certificate(cred)
 			firebase_admin.initialize_app(cred, {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"})
 
+	def grade_midterm_peer_evaluation(self,):
+		ref = db.reference(database)
+		responses = ref.get()
 
+		for user, data in responses.items():
+			for key,response in data.items(): 
+				reviewee = response['student_being_reviewed']
+				if reviewee in self.student_responsebook.keys():
+					self.student_responsebook[reviewee].append(response)
+				else:
+					self.student_responsebook[reviewee] = [response]
 		
+		self.midterm_peer_eval_gradebook = {}
+
+		for student, responses in self.student_responsebook.items():
+			ind_scores = {
+				"labs": {"pts": 0, "total": 0},
+				"meetings_score": {"pts": 0, "total": 0},
+				"memos_score": {"pts": 0, "total": 0},
+				"final_project_score": {"pts": 0, "total": 0},
+				"comments": []
+			}
+
+			for response in responses:
+				for question, score_data in ind_scores.items():
+					if question == "comments":
+						if response.get("comments"):
+							score_data.append(response["comments"])
+					else:
+						score = response.get(question)
+						if score is not None:
+							ind_scores[question]["pts"] += float(score)
+							ind_scores[question]["total"] += 5
+
+			
+			
+			individual_score_normalized = sum(v["pts"] for v in ind_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in ind_scores.values() if isinstance(v, dict))
+			
+			overall_score = (individual_score_normalized*10)
+
+
+			text_feedback = f"""
+			---------------------------------------------------
+			{student}
+			---------------------------------------------------
+			Standard Lab participation: {(ind_scores["labs"]["pts"] / ind_scores["labs"]["total"])*10:.2f} / 10
+			Contribution to group memos: {(ind_scores["memos_score"]["pts"] / ind_scores["memos_score"]["total"])*10:.2f} / 10
+			Participation in group discussions / meetings: {(ind_scores["meetings_score"]["pts"] / ind_scores["meetings_score"]["total"])*10:.2f} / 10
+			Work on final experiment: {(ind_scores["final_project_score"]["pts"] / ind_scores["final_project_score"]["total"])*10:.2f} / 10
+			
+			---------------------------------------------------
+			Peer Evaluation Grade: {overall_score:.2f}/10 ----> {individual_score_normalized*100:.2f}%
+			---------------------------------------------------
+			Comments: {"\n-" + "\n-".join(ind_scores["comments"])} 
+
+
+			"""
+
+			self.midterm_peer_eval_gradebook[student] = [overall_score,text_feedback]
+
+
 	def grade_prop(self,database):
 		#write response to Proposal database
 		ref = db.reference(database)
@@ -297,18 +356,18 @@ class Grader:
 if __name__ == "__main__":
 	grad = Grader()
 	#grad.organize_responses()
-	database = 'Proposal_Response2'
+	database = 'Midterm_Peer_Evaluations'
 	grad.organize_responses()
-	grad.grade_prop(database)
+	grad.grade_midterm_peer_evaluation()
 	# for student,values in grad.proposal_gradebook.items():
 	# 	print(values[1])
 
 	# for grade in proposal_grades:
 	# 	print(grade[2])
 	grades = []
-	for student in grad.proposal_gradebook.keys():
+	for student in grad.midterm_peer_eval_gradebook.keys():
 		
-		print(grad.proposal_gradebook[student][1])
+		print(grad.midterm_peer_eval_gradebook[student][1])
 		print('\n')
 	# with open("proposal_grades.txt", "w") as f:
 	# 	for student in grad.proposal_gradebook.keys():
