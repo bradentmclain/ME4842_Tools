@@ -102,7 +102,7 @@ if st.user.is_logged_in:
 		
 		st.success(f"You are successfully logged in, {sign_in_name}.")
 		####Begin UI Here
-		st.title("ME4842 Proposal Presentation Feedback")
+		st.title("ME4842 Midterm Peer Evaluation")
 		st.header("Student Identification")
 
 		ind_scores = []
