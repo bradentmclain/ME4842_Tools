@@ -45,7 +45,7 @@ def all_scores_filled(dict1,dict2):
 nested = defaultdict(lambda: defaultdict(list))
 
 for entry in st.secrets["class_list"]["students"]:
-    section, group, name = entry.split(",", 2)
+    section, group, name,email = entry.split(",", 3)
     section = section.strip()
     group = group.strip()
     name = name.strip()
