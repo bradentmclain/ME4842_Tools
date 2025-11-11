@@ -47,7 +47,7 @@ nested = defaultdict(lambda: defaultdict(list))
 student_dict = {}
 
 for entry in st.secrets["class_list"]["students"]:
-	section, group, name, emails = entry.split(",", 3)
+	section, group, name, emails = entry.split(",", 4)
 	section = section.strip()
 	group = group.strip()
 	name = name.strip()
