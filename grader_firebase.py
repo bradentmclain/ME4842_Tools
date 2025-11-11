@@ -32,7 +32,7 @@ class Grader:
 			firebase_admin.initialize_app(cred, {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"})
 
 	def grade_midterm_peer_evaluation(self,):
-		ref = db.reference(database)
+		ref = db.reference('Midterm_Peer_Evaluations')
 		responses = ref.get()
 
 		for user, data in responses.items():
@@ -90,6 +90,7 @@ class Grader:
 			"""
 
 			self.midterm_peer_eval_gradebook[student] = [overall_score,text_feedback]
+		return self.midterm_peer_eval_gradebook
 
 
 	def grade_prop(self,database):
