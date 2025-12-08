@@ -63,6 +63,20 @@ class CanvasTool:
 			print(f'"{section},{group},{student},{email_id}",')
 		print(']')
 
+	def print_student_grops(self):
+		#use this function to create the secrets file for survey configuration
+		student_list = []
+		for student in self.student_data:
+			section = self.student_data[student][1].split('-')[-1]
+			group = self.student_data[student][2].replace(" ","")
+			email_id = self.student_data[student][3]
+			student_list.append((group,[student,email_id]))
+			
+		student_list_sorted = sorted(student_list)
+		for stuff in student_list_sorted:
+			print(f'{stuff[0]},{stuff[1][0]},{stuff[1][1]}')
+
+
 	def print_student_emails(self):
 		#use this function to print student emails
 		for section in self.sections:
@@ -161,8 +175,7 @@ if __name__ == "__main__":
 	#print(mycanvas.student_data)
 	#mycanvas.print_student_emails()
 	#mycanvas.print_student_emails()
-	mycanvas.print_survey_config()
-
+	mycanvas.print_student_grops()
 	#print(mycanvas.student_data)
 	# print('uploading assignment')
 	
