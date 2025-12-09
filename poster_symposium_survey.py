@@ -151,6 +151,7 @@ if st.user.is_logged_in:
 
 			ind_feedback_dict = {
 				"active_user": st.session_state.active_user,
+				"group":group,
 				"completeness": completeness,
 				"technical_content": technical_content,
 				"presentation_quality": presentation_quality,
