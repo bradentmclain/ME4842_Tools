@@ -94,6 +94,8 @@ ref = db.reference("Final_Peer_Evaluations")
 
 if st.user.is_logged_in:
 	# Safely extract claims (st.user is dict-like)
+	st.write("st.user:", st.user)
+	st.write("is_logged_in:", st.user.is_logged_in)
 	sign_in_dict = dict(st.user)
 	sign_in_id = sign_in_dict.get("email").split('@')[0]
 	sign_in_name = sign_in_dict.get("name", "User")
