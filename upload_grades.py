@@ -10,7 +10,7 @@ grad.organize_responses()
 #proposal_grades = grad.grade_prop()
 
 
-gradebook = grad.grade_midterm_peer_evaluation()
+gradebook = grad.grade_symposium()
 
 mycanvas = CanvasTool()
 mycanvas.find_student_data()
@@ -29,7 +29,7 @@ for student in gradebook.keys():
 	else:
 		print(f'could not find {student} in course')
 
-assignment_id = 3130605
+assignment_id = 3130607
 start = time.time()
 
 mycanvas.upload_bulk_grades(assignment_id,grades)

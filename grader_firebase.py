@@ -92,6 +92,145 @@ class Grader:
 			self.midterm_peer_eval_gradebook[student] = [overall_score,text_feedback]
 		return self.midterm_peer_eval_gradebook
 
+	def grade_final_peer_evaluation(self,):
+		ref = db.reference('Final_Peer_Evaluations')
+		responses = ref.get()
+
+		self.course_feedback = []
+
+		for user, data in responses.items():
+			for key,response in data.items(): 
+				if key =='me4842_comments':
+					for comment in data['me4842_comments'].values():
+						if comment.strip():
+							self.course_feedback.append(comment)
+				else:
+					reviewee = response['student_being_reviewed']
+					if reviewee in self.student_responsebook.keys():
+						self.student_responsebook[reviewee].append(response)
+					else:
+						self.student_responsebook[reviewee] = [response]
+		
+		self.final_peer_eval_gradebook = {}
+
+		for student, responses in self.student_responsebook.items():
+			ind_scores = {
+				"labs_and_memos": {"pts": 0, "total": 0},
+				"meetings_score": {"pts": 0, "total": 0},
+				"final_project_score": {"pts": 0, "total": 0},
+				"comments": []
+			}
+
+			for response in responses:
+				for question, score_data in ind_scores.items():
+					if question == "comments":
+						if response.get("comments"):
+							score_data.append(response["comments"])
+					else:
+						score = response.get(question)
+						if score is not None:
+							ind_scores[question]["pts"] += float(score)
+							ind_scores[question]["total"] += 5
+
+			
+			
+			individual_score_normalized = sum(v["pts"] for v in ind_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in ind_scores.values() if isinstance(v, dict))
+			
+			overall_score = (individual_score_normalized*10)
+
+
+			text_feedback = f"""
+			---------------------------------------------------
+			{student}
+			---------------------------------------------------
+			Standard Lab participation: {(ind_scores["labs_and_memos"]["pts"] / ind_scores["labs_and_memos"]["total"])*10:.2f} / 10
+			Participation during group meetings: {(ind_scores["meetings_score"]["pts"] / ind_scores["meetings_score"]["total"])*10:.2f} / 10
+			Work on final experiment: {(ind_scores["final_project_score"]["pts"] / ind_scores["final_project_score"]["total"])*10:.2f} / 10
+			---------------------------------------------------
+			Peer Evaluation Grade: {overall_score:.2f}/10 ----> {individual_score_normalized*100:.2f}%
+			---------------------------------------------------
+			Comments: {"\n-" + "\n-".join(ind_scores["comments"])} 
+
+
+			"""
+
+			self.final_peer_eval_gradebook[student] = [overall_score,text_feedback]
+			
+			sep = "\n" + "=" * 80 + "\n"
+			with open("me4842_feedback.txt", "w", encoding="utf-8") as f:
+				for i, response in enumerate(self.course_feedback, start=1):
+					f.write(f"Response {i}\n")
+					f.write(response.rstrip())
+					f.write(sep)
+
+		return self.final_peer_eval_gradebook
+
+
+	def grade_symposium(self):
+		ref = db.reference('Poster_Symposium_Evaluation')
+		responses = ref.get()
+
+		self.symposium_group_gradebook = {}
+		self.symposium_student_gradebook = {}
+
+		for user, data in responses.items():
+			for key,response in data.items():
+				group_being_reviewed = response['group']
+				if group_being_reviewed in self.student_responsebook.keys():
+					self.student_responsebook[group_being_reviewed].append(response)
+				else:
+					self.student_responsebook[group_being_reviewed] = [response]
+
+		for group, group_responses in self.student_responsebook.items():
+			group_scores = {
+			"answering_questions": {"pts": 0, "total": 0},
+			"technical_content": {"pts": 0, "total": 0},
+			"completeness": {"pts": 0, "total": 0},
+			"presentation_quality": {"pts": 0, "total": 0},
+			"feedback": []
+			}
+
+			for response in group_responses:
+				for question, score_data in group_scores.items():
+					if question == "feedback":
+						if response.get("feedback"):
+							score_data.append(response["feedback"])
+					else:
+						score = response.get(question)
+						if score is not None:
+							if int(score) != 0:
+								group_scores[question]["pts"] += float(score) 
+								group_scores[question]["total"] += 100
+
+			group_score_normalized = sum(v["pts"] for v in group_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in group_scores.values() if isinstance(v, dict))
+			text_feedback = f"""
+
+			---------------------------------------------------
+			Poster Symposium Score: {group}
+			---------------------------------------------------
+			Technical Content: {(group_scores["technical_content"]["pts"] / group_scores["technical_content"]["total"] * 100):.2f}%
+			Presentation Completeness: {(group_scores["completeness"]["pts"] / group_scores["completeness"]["total"] * 100):.2f}%
+			Presentation Quality: {(group_scores["presentation_quality"]["pts"] / group_scores["presentation_quality"]["total"] * 100):.2f}%
+			Ability to Answer Questions: {(group_scores["answering_questions"]["pts"] / group_scores["answering_questions"]["total"] * 100):.2f}%
+			
+			Group Score: {group_score_normalized*100:.2f}%
+			Group Points: {group_score_normalized*50:.2f} / 50
+
+			Inidvidual Feedback Recieved: {"\n-" + "\n-".join(group_scores["feedback"])} 
+			"""
+			
+			self.symposium_group_gradebook[group] = [group_score_normalized*50,text_feedback]
+
+		secrets = toml.load(".streamlit/secrets.toml")
+		students = secrets['class_list']['students']
+
+		for student in students:
+			section,group,name,userid = student.split(',')
+			self.symposium_student_gradebook[name] = self.symposium_group_gradebook[group]
+			print(self.symposium_student_gradebook[name][1])
+
+		return self.symposium_student_gradebook
+
 
 	def grade_prop(self,database):
 		#write response to Proposal database
@@ -357,19 +496,16 @@ class Grader:
 if __name__ == "__main__":
 	grad = Grader()
 	#grad.organize_responses()
-	database = 'Midterm_Peer_Evaluations'
+
 	grad.organize_responses()
-	grad.grade_midterm_peer_evaluation()
+	grad.grade_symposium()
 	# for student,values in grad.proposal_gradebook.items():
 	# 	print(values[1])
 
 	# for grade in proposal_grades:
 	# 	print(grade[2])
-	grades = []
-	for student in grad.midterm_peer_eval_gradebook.keys():
-		
-		print(grad.midterm_peer_eval_gradebook[student][1])
-		print('\n')
+
+
 	# with open("proposal_grades.txt", "w") as f:
 	# 	for student in grad.proposal_gradebook.keys():
 	# 		f.write(str(grad.proposal_gradebook[student][1]) + "\n\n")
