@@ -65,7 +65,7 @@ ref = db.reference(f"Group_Creation/{st.session_state['active_user']}")
 
 ####Begin UI Here
 st.title("ME4842 Group Creation and Lab Selection")
-
+st.write('Please have only one person per group fill this survey out. If you need to change your submission, have the same student resubmit. You can overwrite previous submissions.')
 
 
 ind_scores = []
