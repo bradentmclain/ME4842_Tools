@@ -55,11 +55,11 @@ In order to use this repository for ME4842 follow the steps below. You can use t
 
 0. Follow the setup guide above to create all neccesary accounts and secrets files.
 
-# First Week Group Creation
+#### First Week Group Creation
 1. Create student list and add to ./.secrets/secrets.toml
 2. Use CanvasTools.py to create inital student list
 
-# Mid-Semester Presentation Survey Feedback
+#### Mid-Semester Presentation Survey Feedback
 1. Follow the setup guide above to create all neccesary accounts and secrets files.
 2. Use CanvasTools.py to create inital student list
 
