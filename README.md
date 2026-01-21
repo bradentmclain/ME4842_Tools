@@ -63,6 +63,8 @@ In order to use this repository for ME4842 follow the steps below. You can use t
 1. Follow the setup guide above to create all neccesary accounts and secrets files.
 2. Use CanvasTools.py to create inital student list
 
+<!-- 
+
 
 
 ### Survey Useage
@@ -89,7 +91,7 @@ Assignment Data), so that the grader can grade many different assignments. The o
 ### Canvas API Useage
 
 The Canvas API is full of useful calls to manipulate your course and query class data. In order to use this script, you need to add a configuration file of canvas_secrets.toml into ./.canvas/canvas_secrets.toml within your root directory. The secrets file should contain your personal API key along with the umsystem api url.  Optionally, you can add the course ID into the secrets file. **TODO:** Add layout for secrets file.
-
+-->
 
 Feel free to contact Braden McLain (btmywv@umsystem.edu) with any questions.
 
