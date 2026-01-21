@@ -31,7 +31,7 @@ Before using tools in this repository, the following setup steps must be taken.
 ***Note this key should be securely saved and never commited to a github page. It should be treated as a password.
 
 ### Create Firebase Realtime Database
-1. Go to the firebase console https://console.firebase.google.com/ and sign in with your desired Google account. 
+1. Go to the firebase [console](https://console.firebase.google.com/ and sign in with your desired Google account.)
 2. Create a new firebase project by following prompts. This project will store one database.
 3. After the project has been created you will be taken to Firebase project home. On the "Product Categories" tab select "Build" > "Realtime Database" > "Create Database"
 4. After the database has been created copy the reference url and add it into "./.secrets/secrets.toml" file in the [database_url] section.
