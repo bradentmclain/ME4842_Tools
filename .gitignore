@@ -2,3 +2,5 @@
 groups.yml
 assignments/
 assignments/*
+.DS_Store
+__pycache__/
