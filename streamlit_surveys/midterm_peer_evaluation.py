@@ -81,12 +81,12 @@ def show_review_prompt():
 	st.success(f"Thanks for your feedback {st.session_state['active_user'].split(' ')[0]}! Your responses have been recorded.")
 
 def init_firebase():
-	# Only initialize once
-	if not firebase_admin._apps:
-		#database authentication
-		cred = dict(st.secrets["firebase_creds"])
-		cred = credentials.Certificate(cred)
-		firebase_admin.initialize_app(cred, {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"})
+    # Only initialize once
+    if not firebase_admin._apps:
+        #database authentication
+        cred = dict(st.secrets["firebase_creds"])
+        cred = credentials.Certificate(cred)
+        firebase_admin.initialize_app(cred, {"databaseURL": st.secrets['database_url']['url']})
 
 init_firebase()
 #write response to Proposal database

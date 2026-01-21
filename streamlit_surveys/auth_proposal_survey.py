@@ -38,18 +38,14 @@ def logout_bar(email: str | None):
     with col2:
         st.button("Log out", use_container_width=True, on_click=st.logout)
 
-# =========================
-# APP CONTENT (PROTECTED)
-# =========================
+
 def init_firebase():
     # Only initialize once
     if not firebase_admin._apps:
-        cred_dict = dict(st.secrets["firebase_creds"])
-        cred = credentials.Certificate(cred_dict)
-        firebase_admin.initialize_app(
-            cred,
-            {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"},
-        )
+        #database authentication
+        cred = dict(st.secrets["firebase_creds"])
+        cred = credentials.Certificate(cred)
+        firebase_admin.initialize_app(cred, {"databaseURL": st.secrets['database_url']['url']})
 
 def protected_app():
     # --- Persisted UI state defaults (avoid KeyErrors) ---

@@ -94,7 +94,7 @@ def init_firebase():
         #database authentication
         cred = dict(st.secrets["firebase_creds"])
         cred = credentials.Certificate(cred)
-        firebase_admin.initialize_app(cred, {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"})
+        firebase_admin.initialize_app(cred, {"databaseURL": st.secrets['database_url']['url']})
 
 init_firebase()
 #write response to Proposal database
