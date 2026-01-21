@@ -58,19 +58,27 @@ In order to use this repository for ME4842 follow the steps below. You can use t
 #### First Week Group Creation
 1. Create student list and add to `./.secrets/secrets.toml`.
     1. Update COURSE_ID within `./.canvas/canvas_secrets.toml` file to reflect this semester's Canvas course ID. This is a 6 digit number that can be found in the course link. Example: https://umsystem.instructure.com/courses/######
-    2. Use `canvas_tools.py` to print student data for secrets file. Follow instructions and paste into `./.secrets/secrets.toml` file for running locally. To run through Community Cloud (web based), the whole `secrets.toml` file should be uploaded to the survey's encrpted secrets enviroment. 
+    2. Use `canvas_tools.py` to print student data for secrets file. Follow instructions and paste into `./.secrets/secrets.toml` file for running locally. 
 
        ```bash
-        python canvas_  tools.py secrets
+        python canvas_ tools.py secrets
  
-    4. asdf
-4. Use CanvasTools.py to create inital student list.
-5. Upload updated secrets file to streamlit and launch survey.
-6. Collect responses from students.
+4. Launch streamlit survey.
+    1. To launch any streamlit survey locally, in this case the group creation survey, run the following command:
+
+        ```bash
+        `streamlit run group_creation.py`
+
+    2. To launch the streamlit survey through community cloud, first open up the developer's console. https://share.streamlit.io/
+    3. Select "Create app" > "Deploy public app from Github" and then fill in neccesary information. The "Main file path" needs to point to your desired survey in the Github repo.
+    4. Select "Advanced settings". Use Python3.13.  Copy your local `secrets.toml` file and paste into encrypted secrets enviroment.
+    5. Select "Deploy" when you are ready to launch the survey.  Note survey will sleep after 48 hours of inactivity.  You can relaunch from the developers console at any time.
+       
+6. More to come.
+7. Collect responses from students.
 
 #### Mid-Semester Presentation Survey Feedback
-1. Follow the setup guide above to create all neccesary accounts and secrets files.
-2. Use CanvasTools.py to create inital student list
+1.
 
 <!-- 
 
