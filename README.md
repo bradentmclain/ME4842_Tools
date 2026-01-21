@@ -53,8 +53,17 @@ Before using tools in this repository, the following setup steps must be taken.
 ## Useage Guide
 In order to use this repository for ME4842 follow the steps below. You can use this codebase to follow similar steps for other courses as well.
 
+0. Follow the setup guide above to create all neccesary accounts and secrets files.
+
+# First Week Group Creation
+1. Create student list and add to ./.secrets/secrets.toml
+2. Use CanvasTools.py to create inital student list
+
+# Mid-Semester Presentation Survey Feedback
 1. Follow the setup guide above to create all neccesary accounts and secrets files.
 2. Use CanvasTools.py to create inital student list
+
+
 
 ### Survey Useage
 The following guide will walk you through the steps of first time setup and useage of this repository. 
