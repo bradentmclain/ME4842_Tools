@@ -14,15 +14,47 @@ This repository is structured to meet the needs of ME4842. It contains many modu
 - All data from surveys is stored in Firebase Realtime Database, a NoSql cloud database from Google.
 - Grader.py pulls data from Firebase and grades desired assignments.
 - Upload_Grades.py utilizes Grader.py and canvas_tools.py to score assignments and upload the scores to Canvas.
-- A single "secrets.toml" file contains Canvas, Firebase, and OAuth API Keys as well as organizational student data. Student data kept in this file is not sensitive and includes [Section, Group, Name, Email.]
+- A "secrets.toml" file contains  Firebase, and OAuth API Keys as well as organizational student data. Student data kept in this file is not sensitive and includes [Section, Group, Name, Email.] A seperate "canvas_secrets.toml" file stores Canvas API key information.
 
 ## Setup Guide
-Before using tools in this reposityor, the following setup steps must be taken.
+Before using tools in this repository, the following setup steps must be taken.
 
-1. 
+1. Create a personal Canvas API key and add it to secrets.toml.
+2. Create a Firebase Realtime Database for the project. Add the Firebase service account key (JSON) to secrets.toml.
+3. Create a Streamlit Community Cloud account. Run online surveys by linking this Github repo to your account. Run local surveys by installing `requirements.txt`.
+4. Create a Google OAuth client and add the client secret to secrets.toml. You will also need to allow redirect URIs with links for all applications.
+
+### Create Canvas API key
+1. Log into your Canvas account. Open account settings.
+2. Under "Approved Integrations" select "New Token".  Add name and desired expiration date.
+3. Generate the token. This will be the only time you can see the token here. Immidiatley move the key into the "./.canvas/canvas_secrets.toml" file in the [canvas] section.
+***Note this key should be securely saved and never commited to a github page. It should be treated as a password.
+
+### Create Firebase Realtime Database
+1. Go to the firebase console https://console.firebase.google.com/ and sign in with your desired Google account. 
+2. Create a new firebase project by following prompts. This project will store one database.
+3. After the project has been created you will be taken to Firebase project home. On the "Product Categories" tab select "Build" > "Realtime Database" > "Create Database"
+4. After the database has been created copy the reference url and add it into "./.secrets/secrets.toml" file in the [database_url] section.
+5. Open "Project settings". Under the "Service accounts" tab, select "Python" as the firebase admin SDK.
+6. Select "Generate new private key" and download the .JSON key file. Move this file into the "./.secrets/secrets.toml" file in the [firebase_creds] section.
+***Note this key should be securely saved and never commited to a github page. It should be treated as a password.
+
+### Create Streamlit Community Cloud Account
+1. Go to the Streamlit Community Cloud site https://streamlit.io/cloud and authenticate with your github account. This is required to launch web applications.
+2. Approve streamlit access to the ME4842_Tools repository.
+
+### Create OAuth Client
+1. Open Google Cloud Console https://console.cloud.google.com/apis/credentials and accept terms of service. Create a project.
+2. Configure "OAuth consent screen" with desired contact information and organization requirements.
+3. Select "Create credentials" > "OAuth client ID". The application type is a "Web application".
+4. Under "Authorized Redirect URIs" add the callback URIs from each streamlit web app you create. This can be done throughout the semester as you create new apps. The URIs take the form <https://my-app.streamlit.app//oauth2callback>. To run locally use <http://localhost:8501/oauth2callback>. You will need to add this redirect URI into the web app's corresponding "./.secrets/secrets.toml" file. Each web based streamlit application has its own secrets.toml file.
+5. Create the credentials and the copy the "Client ID" and "Client Secret". Paste them both into the "./.secrets/secrets.toml" in the [auth] section.
 
 ## Useage Guide
-To 
+In order to use this repository for ME4842 follow the steps below. You can use this codebase to follow similar steps for other courses as well.
+
+1. Follow the setup guide above to create all neccesary accounts and secrets files.
+2. Use CanvasTools.py to create inital student list
 
 ### Survey Useage
 The following guide will walk you through the steps of first time setup and useage of this repository. 
