@@ -4,3 +4,4 @@ assignments/
 assignments/*
 .DS_Store
 __pycache__/
+!examples/**/*.ext

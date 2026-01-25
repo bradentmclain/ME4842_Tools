@@ -12,6 +12,9 @@ import firebase_admin
 from firebase_admin import credentials, db
 import streamlit as st
 import numpy as np
+import argparse
+from pathlib import Path
+
 
 #GRADER FOR ME4842 SURVEYS, THIS USES A STANDARD RESPONSE AND GRADEBOOK FOR ALL ASSIGNMENTS
 class Grader:
@@ -23,19 +26,11 @@ class Grader:
         #student gradebook shape is {name: [weight, score, written_feedback]}
         self.student_gradebook = {}
 
-        if not firebase_admin._apps:
-            #database authentication
-            cred = dict(st.secrets["firebase_creds"])
-            cred = credentials.Certificate(cred)
-            firebase_admin.initialize_app(cred, {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"})
-
-    #######BOOK KEEPING FUNCTIONS########
-    def organize_responses(self,):
-        if not firebase_admin._apps:
-            #database authentication
-            cred = dict(st.secrets["firebase_creds"])
-            cred = credentials.Certificate(cred)
-            firebase_admin.initialize_app(cred, {"databaseURL": "https://fs2025-me4842-default-rtdb.firebaseio.com/"})
+    if not firebase_admin._apps:
+        #database authentication
+        cred = dict(st.secrets["firebase_creds"])
+        cred = credentials.Certificate(cred)
+        firebase_admin.initialize_app(cred, {"databaseURL": st.secrets['database_url']['url']})
 
     def grade_midterm_peer_evaluation(self,):
         ref = db.reference('Midterm_Peer_Evaluations')
@@ -358,7 +353,7 @@ class Grader:
 
 
     def create_groups(self,):
-        group_letters = ['A','B','C','D','E']
+        group_letters = ['A','B','C','D','E','F','G']
 
         #formatted as {section:Group A, Group B...}
         student_groups = {}
@@ -435,9 +430,16 @@ class Grader:
         # Run picker
 
         pref_responses = {}
+        if os.path.isdir('lab_assignments'):
+            is_empty = not any(Path('lab_assignments').iterdir())
+            if not is_empty:
+                user_data = input('A lab_assignments folder exists and contains data. Do you with to overwrite? (Y/N)\n').strip().lower()
+                if user_data == 'n':
+                    print(f'skipped')
+                    return
 
-        shutil.rmtree("assignments", ignore_errors=True)
-        os.mkdir("assignments")
+        shutil.rmtree("lab_assignments", ignore_errors=True)
+        os.mkdir("lab_assignments")
 
         with open("groups.yml", "r") as f:
             data = yaml.safe_load(f)
@@ -457,7 +459,7 @@ class Grader:
         for section_name, data in sections_data_yaml.items():
             group_data = []
             for group_name, labs in data.items():
-                labs = labs.split(',')
+                print(labs)
                 group_data.append({
                     "Group": group_name,
                     "Electives": labs
@@ -465,13 +467,13 @@ class Grader:
 
             groups, costs, ranks = picker.process_input_and_build_costs(group_data, ['Acoustics', 'Pump', 'Tuned Mass Damper', 'Dynamic Balancing', 'Piezoelectric'], unlisted_penalty=5, seed=1)
 
-            # if len(groups) > 5:
-            #     raise SystemExit(f"Infeasible: {len(groups)} groups but only 5 one-station electives per week. Split the section or add capacity.")
+            if len(groups) > 5:
+                raise SystemExit(f"Infeasible: {len(groups)} groups but only 5 one-station electives per week. Split the section or add capacity.")
             result, status = picker.solve_ilp(groups, costs, T=2)
             if status != "ok":
                 result, status = picker.solve_greedy(groups, costs, T=2)
 
-            picker.write_output(f"assignments/{section_name}.xlsx", result, groups, costs, ranks, None, 5, T=2)
+            picker.write_output(f"lab_assignments/{section_name}.xlsx", result, groups, costs, ranks, None, 5, T=2)
             print(json.dumps({"status": status, "total_cost": result["total_cost"], "groups": len(groups)}))
 
 
@@ -499,20 +501,35 @@ class Grader:
             f.write(yaml.dump(data))
         
 
+def main():
+    parser = argparse.ArgumentParser(
+        description="Command dispatcher for Worker class"
+    )
+
+    parser.add_argument(
+        "command",
+        choices=["groups_yml", 'optimize_labs'],
+        help="Class Grading and organization Functions"
+    )
+
+    # parser.add_argument(
+    #     "--value",
+    #     type=int,
+    #     default=0,
+    #     help="Optional value for run()"
+    # )
+
+    args = parser.parse_args()
+
+    grader = Grader()
+
+    # ---- Dispatch ----
+    if args.command == "groups_yml":
+        grader.create_groups()
+
+    if args.command == 'optimize_labs':
+        grader.assign_labs()
+
     
 if __name__ == "__main__":
-    grad = Grader()
-    #grad.organize_responses()
-
-    grad.create_groups()
-
-    # for student,values in grad.proposal_gradebook.items():
-    # 	print(values[1])
-
-    # for grade in proposal_grades:
-    # 	print(grade[2])
-
-
-    # with open("proposal_grades.txt", "w") as f:
-    # 	for student in grad.proposal_gradebook.keys():
-    # 		f.write(str(grad.proposal_gradebook[student][1]) + "\n\n")
+    main()

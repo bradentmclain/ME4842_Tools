@@ -123,57 +123,57 @@ class CanvasTool:
         students = []
         for group in data['Groups']:
             group_name = list(group.keys())[0]
-            print(group_name)
             for student in group[group_name]['Group Members']:
                 students.append(student)
-
         
         for ungrouped in data['Students not in Group']:
             for section, ungrouped_student in ungrouped.items():
                 if ungrouped_student not in students:
-                    print(f'{ungrouped_student} has not been added to a group. Please resolve in groups.yml')
-                    error = True
-        
+                    print(f'{ungrouped_student} has not been added to a group.')
+                    ungrouped_students = True
+
         for double_booked in data['Students in Multiple Groups']:
             for section, double_booked_student in double_booked.items():
                 if students.count(double_booked_student) > 1:
                     print(f'{double_booked_student} is in more than one group. Please resolve in groups.yml')
-                    error = True
-
-        if error:
-            return
+                    return
         
+        if ungrouped_students:
+            user_data = input('Do you wish to continue before resolving these conflicts? (Y/N)\n').strip().lower()
+            if user_data == 'n':
+                return
+
         existing_canvas_group_names = []
         for g in self.groups:
             existing_canvas_group_names.append(g.name)
 
         #create necessary groups
-        for groups in data['Groups']:
+        for group in data['Groups']:
             group_name = list(group.keys())[0]
             if group_name not in existing_canvas_group_names:
-                #self.project_group_category.create_group(name=group_name)
-                print(f'gonna create {group_name.name}')
+                self.project_group_category.create_group(name=group_name)
+                print(f'gonna create {group_name}')
 
         #add students to respective groups
         for groups in data['Groups']:
             group_name = list(groups.keys())[0]
             for student in groups[group_name]['Group Members']:
                 groups = list(self.project_group_category.get_groups())
-                print(f'loading group {group_name}')
+                #print(f'loading group {group_name}')
                 canvas_group = next((g for g in groups if g.name == group_name), None)
                 if canvas_group != None:
                     uid = self.student_data[student][0]
                     print(f'adding student {student} to group {canvas_group.name}')
-                    #canvas_group.create_membership(user=uid)
+                    canvas_group.create_membership(user=uid)
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Command dispatcher for Worker class"
+        description="Command dispatcher for CanvasTool class"
     )
 
     parser.add_argument(
         "command",
-        choices=["secrets", ],
+        choices=["generate_secrets",'upload_groups'],
         help="MyCanvas class functions"
     )
 
@@ -190,8 +190,11 @@ def main():
     mycanvas.find_student_data()
 
     # ---- Dispatch ----
-    if args.command == "secrets":
+    if args.command == "generate_secrets":
         mycanvas.print_survey_config()
+    
+    if args.command == 'upload_groups':
+        mycanvas.upload_groups()
 
 
 if __name__ == "__main__":
