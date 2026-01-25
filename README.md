@@ -55,13 +55,13 @@ In order to use this repository for ME4842 follow the steps below. You can use t
 
 0. Follow the setup guide above to create all neccesary accounts and secrets files.
 
-#### First Week Group Creation
+#### First Week Group Creation and Lab Assignment
 1. Create student list and add to `./.secrets/secrets.toml`.
     1. Update COURSE_ID within `./.canvas/canvas_secrets.toml` file to reflect this semester's Canvas course ID. This is a 6 digit number that can be found in the course link. Example: https://umsystem.instructure.com/courses/######
     2. Use `canvas_tools.py` to print student data for secrets file. Follow instructions and paste into `./.secrets/secrets.toml` file for running locally. 
 
        ```bash
-        python canvas_ tools.py secrets
+        python canvas_tools.py secrets
  
 4. Launch streamlit survey.
     1. To launch any streamlit survey locally, in this case the group creation survey, run the following command:
@@ -73,9 +73,21 @@ In order to use this repository for ME4842 follow the steps below. You can use t
     3. Select "Create app" > "Deploy public app from Github" and then fill in neccesary information. The "Main file path" needs to point to your desired survey in the Github repo.
     4. Select "Advanced settings". Use Python3.13.  Copy your local `secrets.toml` file and paste into encrypted secrets enviroment.
     5. Select "Deploy" when you are ready to launch the survey.  Note survey will sleep after 48 hours of inactivity.  You can relaunch from the developers console at any time.
+    6. After students have filled out the survey you can create the `groups.yml` file. This file is used to assign group in Canvas and to assign lab selections for the semester.  Create this file with the following command:
+
+       ```bash
+        `python grader.py groups_yml`
        
-6. More to come.
-7. Collect responses from students.
+    7. This file should be treated similarly to a .git conflict. There are two types of conflicts that this file will highlight, "Students in multiple groups" and "Students not in groups". Manually alter the file to remove students in multiple groups and add students who are missing. "Students in multiple groups" must be resolved prior to uploading groups to Canvas. To create this file type the following command in root.
+    8. Once the `groups.yml` has been resolved, create groups and add students with the following command:
+
+        ```bash
+        `python canvas_tools.py upload_groups`
+        
+    8. In order to assign student lab groups use the following command.  This command uses `stutts_picker.py` to evaluate the students desired lab selection and select the optimal (least negative) choice. Output from this will be saved in `./lab_assignments` and are in the form .xlsx.
+
+          ```bash
+        `python grader.py assign_labs`
 
 #### Mid-Semester Presentation Survey Feedback
 1.
