@@ -1,7 +1,7 @@
 *.toml
-groups.yml
 assignments/
 assignments/*
 .DS_Store
 __pycache__/
-!examples/**/*.ext
+!examples/**/*.xlsx
+!examples/**/*.yml
