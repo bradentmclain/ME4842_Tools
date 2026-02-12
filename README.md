@@ -8,6 +8,12 @@ Current ME4842 Assignments available via Streamlit:
 - Poster Symposium (poster_symposium.py)
 - Final Peer Evaluation (final_peer_evaluation.py)
 
+# Helper Tools 
+- canvastools.py 
+- grader.py
+- stutts_picker.py
+- upload_grades.py
+
 ### Overall Structure of Repository
 This repository is structured to meet the needs of ME4842. It contains many modular tools that can be easily used for survey creation and Canvas grading automation in other courses. The basic structure is as follows:
 - Surveys are hosted online or locally through Streamlit, an open-source Python framework for data collection.
