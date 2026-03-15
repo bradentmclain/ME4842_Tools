@@ -236,21 +236,25 @@ class Grader:
     def grade_prop(self,database):
         #write response to Proposal database
         ref = db.reference(database)
-        responses = ref.get()
+        responses = ref.get() or {}
 
-        for key,response in responses.items(): 
-            reviewee = response['student_being_reviewed']
-            if isinstance(reviewee,list):
-                for student in reviewee:
-                    if student in self.student_responsebook.keys():
-                        self.student_responsebook[student].append(response)
-                    else:
-                        self.student_responsebook[student] = [response]
-            else:
-                if reviewee in self.student_responsebook.keys():
-                    self.student_responsebook[reviewee].append(response)
+        for reviewer, reviewer_responses in responses.items():
+            if not isinstance(reviewer_responses,dict):
+                continue
+
+            for key,response in responses.items(): 
+                reviewee = response['student_being_reviewed']
+                if isinstance(reviewee,list):
+                    for student in reviewee:
+                        if student in self.student_responsebook.keys():
+                            self.student_responsebook[student].append(response)
+                        else:
+                            self.student_responsebook[student] = [response]
                 else:
-                    self.student_responsebook[reviewee] = [response]
+                    if reviewee in self.student_responsebook.keys():
+                        self.student_responsebook[reviewee].append(response)
+                    else:
+                        self.student_responsebook[reviewee] = [response]
 
         rating_map = {"Substandard": 2,"Poor": 2.75,"Acceptable": 3.5,"Good": 4.25,"Excellent": 5}
 
