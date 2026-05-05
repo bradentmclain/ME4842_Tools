@@ -233,25 +233,26 @@ class Grader:
         return self.symposium_student_gradebook
 
 
-    def grade_prop(self,database):
+    def grade_prop(self):
         #write response to Proposal database
+        database = 'Proposal_Responses'
         ref = db.reference(database)
         responses = ref.get() or {}
 
         for reviewer, reviewer_responses in responses.items():
-            if not isinstance(reviewer_responses,dict):
+            if not isinstance(reviewer_responses, dict):
                 continue
 
-            for key,response in responses.items(): 
+            for key, response in reviewer_responses.items():  # response is the dict directly
                 reviewee = response['student_being_reviewed']
-                if isinstance(reviewee,list):
+                if isinstance(reviewee, list):
                     for student in reviewee:
-                        if student in self.student_responsebook.keys():
+                        if student in self.student_responsebook:
                             self.student_responsebook[student].append(response)
                         else:
                             self.student_responsebook[student] = [response]
                 else:
-                    if reviewee in self.student_responsebook.keys():
+                    if reviewee in self.student_responsebook:
                         self.student_responsebook[reviewee].append(response)
                     else:
                         self.student_responsebook[reviewee] = [response]
@@ -512,7 +513,7 @@ def main():
 
     parser.add_argument(
         "command",
-        choices=["groups_yml", 'optimize_labs'],
+        choices=["groups_yml", 'optimize_labs','grade_proposal'],
         help="Class Grading and organization Functions"
     )
 
@@ -533,6 +534,12 @@ def main():
 
     if args.command == 'optimize_labs':
         grader.assign_labs()
+    
+    if args.command == 'grade_proposal':
+        gradebook = grader.grade_prop()
+        for student, grades in gradebook.items():
+            print(grades[0])
+            print(grades[1])
 
     
 if __name__ == "__main__":

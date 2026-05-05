@@ -1,16 +1,16 @@
-from grader_firebase import Grader
+from grader import Grader
 from canvas_tools import CanvasTool
 import time
 
 grad = Grader()
-grad.organize_responses()
+#grad.organize_responses()
 
 
 #proposal grades in form {student:[grade,text feedback]}
-#proposal_grades = grad.grade_prop()
+gradebook = grad.grade_prop()
 
 
-gradebook = grad.grade_symposium()
+#gradebook = grad.grade_symposium()
 
 mycanvas = CanvasTool()
 mycanvas.find_student_data()
@@ -29,10 +29,11 @@ for student in gradebook.keys():
 	else:
 		print(f'could not find {student} in course')
 
-assignment_id = 3130607
+assignment_id = 3499459
 start = time.time()
 
 mycanvas.upload_bulk_grades(assignment_id,grades)
+
 # for id in grades.keys():
 # 	print(grades[id])
 print(f'grade upload took {time.time()-start} seconds')

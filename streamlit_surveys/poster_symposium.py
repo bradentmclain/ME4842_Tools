@@ -134,7 +134,7 @@ if st.user.is_logged_in:
 		group = st.selectbox("Select the group that is presenting",	options=["Click to Select"] + all_groups,key="active_group",index=0	)
 
 		#Select group to review
-		st.header("Peer Evaluation")
+		st.header("Poster Evaluation")
 		if st.session_state['active_group'] != 'Click to Select':
 			st.markdown(f"##### Numerical grade of **completeness**")
 			completeness =  st.number_input(f"Did the group complete the experiment? Did they take measurements to identify sources of error? Should they have done more testing? (Enter a number between 0 and 100. 0 = poor and 100 = outstanding", key=f"completeness_{group}", min_value=0.0, max_value=100.0, step=0.1, format="%.1f", value=None)
