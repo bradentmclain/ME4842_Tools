@@ -4,7 +4,7 @@ from collections import defaultdict
 import firebase_admin
 from firebase_admin import credentials, db
 import numpy as np
-from streamlit_surveys.proposal_submission import authorized_actor, save_evaluation, validate_submission
+from proposal_submission import authorized_actor, save_evaluation, validate_submission
 
 if "active_section" in st.session_state:
     st.session_state.active_section = st.session_state.active_section
