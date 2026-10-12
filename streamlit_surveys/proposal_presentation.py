@@ -5,13 +5,10 @@ import firebase_admin
 from firebase_admin import credentials, db
 import numpy as np
 from proposal_submission import authorized_actor, save_evaluation, validate_submission
+from proposal_submit_ui import render_submit
 
 if "active_section" in st.session_state:
     st.session_state.active_section = st.session_state.active_section
-
-#initialization things for UI
-if "dialog_completed" not in st.session_state:
-    st.session_state.dialog_completed = False
 
 if "active_group" not in st.session_state:
     st.session_state.active_group = "Click to Select"
@@ -100,32 +97,6 @@ def is_allowed(sign_in_id: str) -> bool:
 
 def is_instructor(sign_in_id: str) -> bool:
     return sign_in_id in instructor_dict
-
-#submission dialog popup
-@st.dialog("Feedback submitted!")
-def show_review_prompt():
-    # fixed quoting inside f-string below
-    st.success(f"Thanks for your feedback {st.session_state['active_user'].split(' ')[0]}!")
-    st.write("Would you like to review another group? If so, please select 'Review Again' below. Otherwise, you may now close the survey.")
-    if st.button("Review Again"):
-        st.session_state['review_more_dialog'] = "Yes"
-        st.session_state.dialog_completed = True
-        st.rerun()
-
-#if user requests to review another, launch new session. Delete old data
-if st.session_state.dialog_completed and st.session_state.get("review_more_dialog") == "Yes":
-    keys_to_clear = [key for key in st.session_state if (
-        key.startswith("ind_") or 
-        key.startswith("group_") or
-        key.startswith("active_group")
-    )]
-    for key in keys_to_clear:
-        del st.session_state[key]
-    st.session_state.active_group = "Click to Select"
-
-    # Reset flag so this only happens once
-    st.session_state.dialog_completed = False
-    st.rerun()
 
 def init_firebase():
     # Only initialize once
@@ -290,19 +261,22 @@ if st.user.is_logged_in:
                 #on data submission
                 if not is_complete:
                     st.write('Please complete all required fields before submitting.')
-                if st.button("Submit Feedback", disabled = not is_complete):
-                    try:
-                        # Recheck authorization and section at the write boundary.
-                        actor = authorized_actor(dict(st.user), student_dict, instructor_dict)
-                        save_evaluation(ref, actor, st.session_state.active_section,
-                                        st.session_state.active_group, students_by_section_group,
-                                        group_feedback_dict, ind_scores)
-                    except ValueError as exc:
-                        st.error(str(exc))
-                    except Exception:
-                        st.error("Your evaluation could not be saved. Please retry; resubmitting replaces the previous evaluation.")
-                    else:
-                        show_review_prompt()
+                def save_pending(payload):
+                    # Recheck identity and section at the write boundary.
+                    current_actor = authorized_actor(dict(st.user), student_dict, instructor_dict)
+                    if current_actor['name'] != payload['reviewer']:
+                        raise ValueError('Your sign-in changed. Reload before submitting.')
+                    save_evaluation(ref, current_actor, payload['section'], payload['group'],
+                                    students_by_section_group, payload['group_scores'],
+                                    payload['individual_scores'])
+
+                render_submit({
+                    'reviewer': actor['name'],
+                    'section': st.session_state.active_section,
+                    'group': st.session_state.active_group,
+                    'group_scores': group_feedback_dict,
+                    'individual_scores': ind_scores,
+                }, is_complete, save_pending)
 
     else:
         st.error(f"Access denied for {sign_in_id or 'unknown user'}.")
