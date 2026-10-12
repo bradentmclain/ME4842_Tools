@@ -58,10 +58,11 @@ for entry in st.secrets["class_list"]["students"]:
     section = section.strip()
     group = group.strip()
     name = name.strip()
-    email = email.strip()
+    email = email.strip().casefold()
     email_id = email.split('@')[0]  # --- ADDED SIGN-IN STRUCTURE: store Google-login identifier ---
     allowed_email_list.append(email_id)  # --- ADDED SIGN-IN STRUCTURE: whitelist for login access ---
-    nested[section][group].append(name)
+    if name not in nested[section][group]:
+        nested[section][group].append(name)
     student_dict[email_id] = {  # --- ADDED SIGN-IN STRUCTURE: map signed-in user to survey identity ---
         "section": section,
         "group": group,
@@ -81,7 +82,7 @@ instructor_dict = {}
 for entry in st.secrets["class_list"]["instructors"]:
     name, email = entry.split(",", 1)
     name = name.strip()
-    email_id = email.strip().split('@')[0]
+    email_id = email.strip().casefold().split('@')[0]
 
     instructor_dict[email_id] = {
         "name": name
@@ -140,12 +141,12 @@ init_firebase()
 if st.user.is_logged_in:
     
     sign_in_dict = dict(st.user)
-    sign_in_email = sign_in_dict.get("email", "")
+    sign_in_email = sign_in_dict.get("email", "").strip().casefold()
     sign_in_id = sign_in_email.split('@')[0] if sign_in_email else ""
     sign_in_name = sign_in_dict.get("name", "User")
 
 
-    if is_allowed(sign_in_id) or is_instructor(sign_in_id):
+    if sign_in_email.rpartition('@')[2] in {'umsystem.edu', 'mst.edu', 'missouri.edu', 'umkc.edu', 'umsl.edu'} and (is_allowed(sign_in_id) or is_instructor(sign_in_id)):
         
         st.success(f"You are successfully logged in, {sign_in_name}.")
 
@@ -170,7 +171,7 @@ if st.user.is_logged_in:
             #user identification, must be sequential
             section_dropdown = st.selectbox(
                 "Select the section that is presenting",
-                options=["Click to Select"] + list(students_by_section.keys()),
+                options=["Click to Select"] + sorted(students_by_section),
                 key='active_section'
             )
         else:
@@ -182,6 +183,10 @@ if st.user.is_logged_in:
         #Select group to review
 
         st.header("Presentation Review")
+        # A section change or refreshed roster must not leave a stale group selected.
+        available_groups = students_by_section_group.get(st.session_state['active_section'], {})
+        if st.session_state.get('active_group') not in available_groups:
+            st.session_state['active_group'] = 'Click to Select'
         if st.session_state['active_section'] != 'Click to Select':
             group = st.selectbox(
                 "Select the group that is presenting",
