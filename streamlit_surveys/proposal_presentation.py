@@ -4,6 +4,7 @@ from collections import defaultdict
 import firebase_admin
 from firebase_admin import credentials, db
 import numpy as np
+from streamlit_surveys.proposal_submission import authorized_actor, save_evaluation, validate_submission
 
 if "active_section" in st.session_state:
     st.session_state.active_section = st.session_state.active_section
@@ -59,7 +60,7 @@ for entry in st.secrets["class_list"]["students"]:
     group = group.strip()
     name = name.strip()
     email = email.strip().casefold()
-    email_id = email.split('@')[0]  # --- ADDED SIGN-IN STRUCTURE: store Google-login identifier ---
+    email_id = email  # --- ADDED SIGN-IN STRUCTURE: store Google-login identifier ---
     allowed_email_list.append(email_id)  # --- ADDED SIGN-IN STRUCTURE: whitelist for login access ---
     if name not in nested[section][group]:
         nested[section][group].append(name)
@@ -82,7 +83,7 @@ instructor_dict = {}
 for entry in st.secrets["class_list"]["instructors"]:
     name, email = entry.split(",", 1)
     name = name.strip()
-    email_id = email.strip().casefold().split('@')[0]
+    email_id = email.strip().casefold()
 
     instructor_dict[email_id] = {
         "name": name
@@ -142,11 +143,16 @@ if st.user.is_logged_in:
     
     sign_in_dict = dict(st.user)
     sign_in_email = sign_in_dict.get("email", "").strip().casefold()
-    sign_in_id = sign_in_email.split('@')[0] if sign_in_email else ""
+    sign_in_id = sign_in_email
     sign_in_name = sign_in_dict.get("name", "User")
 
 
-    if sign_in_email.rpartition('@')[2] in {'umsystem.edu', 'mst.edu', 'missouri.edu', 'umkc.edu', 'umsl.edu'} and (is_allowed(sign_in_id) or is_instructor(sign_in_id)):
+    try:
+        actor = authorized_actor(sign_in_dict, student_dict, instructor_dict)
+    except ValueError:
+        actor = None
+
+    if actor is not None:
         
         st.success(f"You are successfully logged in, {sign_in_name}.")
 
@@ -183,6 +189,7 @@ if st.user.is_logged_in:
         #Select group to review
 
         st.header("Presentation Review")
+        st.info("Submitting again for the same group replaces your previous group and individual evaluations. Your evaluations of other groups are kept.")
         # A section change or refreshed roster must not leave a stale group selected.
         available_groups = students_by_section_group.get(st.session_state['active_section'], {})
         if st.session_state.get('active_group') not in available_groups:
@@ -273,15 +280,29 @@ if st.user.is_logged_in:
                     "presentation_quality_score": group_presentation_quality,
                     "answering_questions_score": group_answer_questions
                 }
-                is_complete = all_scores_filled(group_feedback_dict, ind_scores)
+                try:
+                    validate_submission(actor, st.session_state.active_section,
+                                        st.session_state.active_group, students_by_section_group,
+                                        group_feedback_dict, ind_scores)
+                    is_complete = True
+                except ValueError:
+                    is_complete = False
                 #on data submission
                 if not is_complete:
                     st.write('Please complete all required fields before submitting.')
                 if st.button("Submit Feedback", disabled = not is_complete):
-                    ref.push(group_feedback_dict)
-                    for ind_response in ind_scores:
-                        ref.push(ind_response)
-                    show_review_prompt()
+                    try:
+                        # Recheck authorization and section at the write boundary.
+                        actor = authorized_actor(dict(st.user), student_dict, instructor_dict)
+                        save_evaluation(ref, actor, st.session_state.active_section,
+                                        st.session_state.active_group, students_by_section_group,
+                                        group_feedback_dict, ind_scores)
+                    except ValueError as exc:
+                        st.error(str(exc))
+                    except Exception:
+                        st.error("Your evaluation could not be saved. Please retry; resubmitting replaces the previous evaluation.")
+                    else:
+                        show_review_prompt()
 
     else:
         st.error(f"Access denied for {sign_in_id or 'unknown user'}.")
