@@ -20,8 +20,7 @@ def payloads():
 class Ref:
     def __init__(self): self.data = {}; self.count = 0
     def push(self):
-        self.count += 1
-        return type('Key', (), {'key': f'-synthetic{self.count:010d}'})()
+        raise AssertionError('Key allocation must never write placeholder records')
     def transaction(self, callback):
         first = callback(deepcopy(self.data))
         assert first == callback(deepcopy(self.data))  # retry-safe
@@ -68,3 +67,14 @@ def test_legacy_duplicates_are_replaced_and_removed_members_do_not_linger():
          {'response_type':'Individual','group_being_scored':'301A','student_being_reviewed':'New Member'}]
     out=s.replace_records(old,'301A',['New Member'],new,['5','6'])
     assert set(out)=={'1','4','6'} and out['4']==old['4']
+
+
+def test_key_generation_is_push_id_compatible_and_unique():
+    alphabet = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
+    stamp = 1791830000000
+    keys = {s.new_push_key(stamp) for _ in range(100)}
+    assert len(keys) == 100
+    for key in keys:
+        decoded = 0
+        for char in key[:8]: decoded = decoded * 64 + alphabet.index(char)
+        assert decoded == stamp and len(key) == 20

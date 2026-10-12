@@ -1,6 +1,7 @@
 """Authorization and atomic replacement for the legacy presentation survey."""
 from copy import deepcopy
 from math import isfinite
+from secrets import choice
 from time import time
 from uuid import uuid4
 
@@ -67,6 +68,16 @@ def replace_records(existing, group, members, payloads, candidate_keys):
     return current
 
 
+def new_push_key(timestamp_ms):
+    # Compatible Firebase push-ID timestamp and 72 random bits, with no remote write.
+    alphabet = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
+    prefix = []
+    for _ in range(8):
+        prefix.append(alphabet[timestamp_ms % 64])
+        timestamp_ms //= 64
+    return ''.join(reversed(prefix)) + ''.join(choice(alphabet) for _ in range(12))
+
+
 def save_evaluation(ref, actor, section, group, groups, group_scores, individual_scores):
     members = validate_submission(actor, section, group, groups, group_scores, individual_scores)
     stamp = int(time() * 1000)
@@ -80,5 +91,5 @@ def save_evaluation(ref, actor, section, group, groups, group_scores, individual
                        submission_id=batch)
         payloads.append(payload)
     # Allocate keys without writes; transaction retries have no side effects.
-    candidates = [ref.push().key for _ in payloads]
+    candidates = [new_push_key(stamp) for _ in payloads]
     ref.transaction(lambda current: replace_records(current, group, members, payloads, candidates))
