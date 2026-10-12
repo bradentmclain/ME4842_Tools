@@ -234,127 +234,37 @@ class Grader:
 
 
     def grade_prop(self):
-        #write response to Proposal database
-        database = 'Proposal_Responses'
-        ref = db.reference(database)
-        responses = ref.get() or {}
+        """Legacy rubric, with cohort means weighted faculty 75% / students 25%."""
+        from legacy_proposal_grading import grade_legacy, roster_roles
 
-        for reviewer, reviewer_responses in responses.items():
-            if not isinstance(reviewer_responses, dict):
-                continue
-
-            for key, response in reviewer_responses.items():  # response is the dict directly
-                reviewee = response['student_being_reviewed']
-                if isinstance(reviewee, list):
-                    for student in reviewee:
-                        if student in self.student_responsebook:
-                            self.student_responsebook[student].append(response)
-                        else:
-                            self.student_responsebook[student] = [response]
-                else:
-                    if reviewee in self.student_responsebook:
-                        self.student_responsebook[reviewee].append(response)
-                    else:
-                        self.student_responsebook[reviewee] = [response]
-
-        rating_map = {"Substandard": 2,"Poor": 2.75,"Acceptable": 3.5,"Good": 4.25,"Excellent": 5}
-
-        #structured [[student name, grade, comments]]
-        self.proposal_gradebook = {}
-
-        for student,responses in self.student_responsebook.items():
-
-            ind_scores = {
-                "dress_code_score": {"pts": 0, "total": 0},
-                "audience_engagement_score": {"pts": 0, "total": 0},
-                "body_language_score": {"pts": 0, "total": 0},
-                "enthusiasm_score": {"pts": 0, "total": 0},
-                "overall_score": {"pts": 0, "total": 0},
-                "written_feedback": []
-            }
-            group_scores = {
-                "technical_content_score": {"pts": 0, "total": 0},
-                "experimental_efficacy_score": {"pts": 0, "total": 0},
-                "completeness_score": {"pts": 0, "total": 0},
-                "presentation_quality_score": {"pts": 0, "total": 0},
-                "answering_questions_score": {"pts": 0, "total": 0},
-                "written_feedback": []
-            }
-            
-            for response in responses:
-                response_type = response['response_type']
-                weight = response['scoring_weight']
-                if response_type == 'Individual':
-                    for question, score_data in ind_scores.items():
-                        if question == "written_feedback":
-                            if response.get("written_feedback"):
-                                score_data.append(response["written_feedback"])
-                        else:
-                            label = response.get(question)
-                            if label is not None:
-                                numeric_score = rating_map[label]
-                                ind_scores[question]["pts"] += float(numeric_score) * weight
-                                ind_scores[question]["total"] += weight * 5
-                                if numeric_score == 1:
-                                    print('found bad score')
-
-                elif response_type == 'Group':
-                    group_name = response['group_being_scored']
-                    for question, score_data in group_scores.items():
-                        if question == "written_feedback":
-                            if response.get("written_feedback"):
-                                score_data.append(response["written_feedback"])
-                        else:
-                            score = response.get(question)
-                            if score is not None:
-                                if int(score) != 0:
-                                    group_scores[question]["pts"] += float(score) * weight
-                                    group_scores[question]["total"] += weight * 10
-
-        
-            individual_score_normalized = sum(v["pts"] for v in ind_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in ind_scores.values() if isinstance(v, dict))
-            group_score_normalized = sum(v["pts"] for v in group_scores.values() if isinstance(v, dict)) / sum(v["total"] for v in group_scores.values() if isinstance(v, dict))
-            overall_score = (individual_score_normalized*25) + (group_score_normalized *10)
-
-
-            text_feedback = f"""
-            ---------------------------------------------------
-            Individual Scores: {student}
-            ---------------------------------------------------
-            Dress Code: {(ind_scores["dress_code_score"]["pts"] / ind_scores["dress_code_score"]["total"] * 100):.2f}%
-            Audience Engagement: {(ind_scores["audience_engagement_score"]["pts"] / ind_scores["audience_engagement_score"]["total"] * 100):.2f}%
-            Body Language: {(ind_scores["body_language_score"]["pts"] / ind_scores["body_language_score"]["total"] * 100):.2f}%
-            Enthusiasm: {(ind_scores["enthusiasm_score"]["pts"] / ind_scores["enthusiasm_score"]["total"] * 100):.2f}%
-            Speaking: {(ind_scores["overall_score"]["pts"] / ind_scores["overall_score"]["total"] * 100):.2f}%
-            
-            Individual Score: {individual_score_normalized*100:.2f}%
-            Individual Points: {individual_score_normalized*25:.2f} / 25
-
-            Inidvidual Feedback Recieved: {"\n-" + "\n-".join(ind_scores["written_feedback"])} 
-            ---------------------------------------------------
-            Group Scores: {group_name}
-            ---------------------------------------------------
-            Technical: {(group_scores["technical_content_score"]["pts"] / group_scores["technical_content_score"]["total"] * 100):.2f}%
-            Efficacy: {(group_scores["experimental_efficacy_score"]["pts"] / group_scores["experimental_efficacy_score"]["total"] * 100):.2f}%
-            Completeness: {(group_scores["completeness_score"]["pts"] / group_scores["completeness_score"]["total"] * 100):.2f}%
-            Presentation Quality: {(group_scores["presentation_quality_score"]["pts"] / group_scores["presentation_quality_score"]["total"] * 100):.2f}%
-            Ability to Answer Questions: {(group_scores["answering_questions_score"]["pts"] / group_scores["answering_questions_score"]["total"] * 100):.2f}%
-            
-            Group Score: {group_score_normalized*100:.2f}%
-            Group Points: {group_score_normalized*10:.2f} / 10
-            
-            Group Feedback Recieved: {"\n-" +"\n-".join(group_scores["written_feedback"])}
-            ---------------------------------------------------
-            Final Assignment Grade
-            ---------------------------------------------------
-            Group Score + Individual Score = Overall Score
-            
-            {individual_score_normalized*25:.2f} + {group_score_normalized*10:.2f}  = {overall_score:.2f}/35 ----> {overall_score*100/35:.2f}%\n
-
-            """
-
-            self.proposal_gradebook[student] = [overall_score,text_feedback]
-        return self.proposal_gradebook
+        responses = db.reference('Proposal_Responses').get() or {}
+        records = [dict(reviewer=reviewer, firebase_key=key, response=row)
+                   for reviewer, rows in responses.items()
+                   for key, row in rows.items()]
+        report = grade_legacy(records, roster_roles(st.secrets['class_list']))
+        gradebook = {}
+        for student, group in report['memberships'].items():
+            individual = report['individuals'].get(student)
+            team = report['groups'][group]
+            if individual is None or individual['percent'] is None or team['percent'] is None:
+                raise ValueError(f'Grade held for {student}: missing individual scores or evaluator cohort.')
+            # Preserve this legacy grader's point allocation. The newer v3 rubric
+            # is a separate policy and requires an explicit migration.
+            ind_points = individual['percent'] * .25
+            group_points = team['percent'] * .10
+            lines = ['Faculty/GTA average: 75%; student average: 25%.',
+                     f'Individual: {ind_points:.2f}/25', f'Group: {group_points:.2f}/10']
+            for label, component in [('Individual', individual), ('Group', team)]:
+                for criterion, detail in component['criteria'].items():
+                    lines.append(f"{label} {criterion}: {detail['percent']:.2f}% "
+                                 f"(faculty/GTA n={detail['faculty']['count']}, "
+                                 f"students n={detail['student']['count']})")
+                lines.extend(f"{label} feedback: {item['text']}" for item in component['feedback'])
+            total = ind_points + group_points
+            lines.append(f'Total: {total:.2f}/35')
+            gradebook[student] = [total, '\n'.join(lines)]
+        self.proposal_gradebook = gradebook
+        return gradebook
 
 
     def create_groups(self,):
