@@ -5,6 +5,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 import numpy as np
 from proposal_submission import authorized_actor, save_evaluation, validate_submission
+from proposal_acceptance import CONTROL_NODE, is_accepting, save_if_accepting
 from proposal_submit_ui import render_submit
 from proposal_schedule import apply_presentation_schedule, NOTICE
 
@@ -160,6 +161,13 @@ if st.user.is_logged_in:
             st.markdown(f'#### Name: :green[{st.session_state["active_user"]}]')
             st.markdown(f'#### Section: :green[{st.session_state["active_section"]}]')
         ref = db.reference(f"Proposal_Responses/{st.session_state['active_user']}")
+        control_ref = db.reference(CONTROL_NODE)
+        try:
+            accepting = is_accepting(control_ref.get())
+        except Exception:
+            accepting = False
+        if not accepting:
+            st.warning("Evaluations are closed or acceptance status is unavailable. New submissions and revisions cannot be saved. Refresh after the instructor reopens evaluations.")
         #Select group to review
 
         st.header("Presentation Review")
@@ -270,7 +278,7 @@ if st.user.is_logged_in:
                     current_actor = authorized_actor(dict(st.user), student_dict, instructor_dict)
                     if current_actor['name'] != payload['reviewer']:
                         raise ValueError('Your sign-in changed. Reload before submitting.')
-                    save_evaluation(ref, current_actor, payload['section'], payload['group'],
+                    save_if_accepting(control_ref, save_evaluation, ref, current_actor, payload['section'], payload['group'],
                                     students_by_section_group, payload['group_scores'],
                                     payload['individual_scores'])
 
@@ -280,7 +288,7 @@ if st.user.is_logged_in:
                     'group': st.session_state.active_group,
                     'group_scores': group_feedback_dict,
                     'individual_scores': ind_scores,
-                }, is_complete, save_pending)
+                }, is_complete and accepting, save_pending)
 
     else:
         st.error(f"Access denied for {sign_in_id or 'unknown user'}.")
