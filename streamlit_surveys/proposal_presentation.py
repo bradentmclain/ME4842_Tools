@@ -6,6 +6,7 @@ from firebase_admin import credentials, db
 import numpy as np
 from proposal_submission import authorized_actor, save_evaluation, validate_submission
 from proposal_submit_ui import render_submit
+from proposal_schedule import apply_presentation_schedule, NOTICE
 
 if "active_section" in st.session_state:
     st.session_state.active_section = st.session_state.active_section
@@ -68,7 +69,9 @@ for entry in st.secrets["class_list"]["students"]:
         "email": email,
     }
 
-students_by_section_group = {s: dict(groups) for s, groups in nested.items()}
+students_by_section_group, student_dict = apply_presentation_schedule(
+    {s: dict(groups) for s, groups in nested.items()}, student_dict
+)
 
 students_by_section = {
     section: [student for group in groups.values() for student in group]
@@ -160,6 +163,7 @@ if st.user.is_logged_in:
         #Select group to review
 
         st.header("Presentation Review")
+        st.info(NOTICE)
         st.info("Submitting again for the same group replaces your previous group and individual evaluations. Your evaluations of other groups are kept.")
         # A section change or refreshed roster must not leave a stale group selected.
         available_groups = students_by_section_group.get(st.session_state['active_section'], {})
