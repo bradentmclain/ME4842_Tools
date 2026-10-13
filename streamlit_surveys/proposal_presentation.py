@@ -172,7 +172,7 @@ if st.user.is_logged_in:
 
         st.header("Presentation Review")
         st.info(NOTICE)
-        st.info("Submitting again for the same group replaces your previous group and individual evaluations. Your evaluations of other groups are kept.")
+        st.info("Submitting again for the same group replaces your previous group and individual evaluations. Your evaluations of other groups are kept. Every new submission and revision is also preserved with timestamps; only your latest evaluation is used for grading.")
         # A section change or refreshed roster must not leave a stale group selected.
         available_groups = students_by_section_group.get(st.session_state['active_section'], {})
         if st.session_state.get('active_group') not in available_groups:

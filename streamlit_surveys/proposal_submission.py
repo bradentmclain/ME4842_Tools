@@ -92,4 +92,43 @@ def save_evaluation(ref, actor, section, group, groups, group_scores, individual
         payloads.append(payload)
     # Allocate keys without writes; transaction retries have no side effects.
     candidates = [new_push_key(stamp) for _ in payloads]
-    ref.transaction(lambda current: replace_records(current, group, members, payloads, candidates))
+    ref.transaction(lambda current: replace_with_history(
+        current, group, members, payloads, candidates, batch, stamp, actor))
+
+
+def replace_with_history(existing, group, members, payloads, candidates, batch, stamp, actor):
+    """Latest records and immutable submission snapshots commit together or not at all."""
+    before = deepcopy(existing or {})
+    history = {}
+    previous_members = set(members)
+    for row in before.values():
+        if row.get('response_type') == 'Group' and row.get('group_being_scored') == group:
+            previous_members.update(row.get('student_being_reviewed', []))
+            history.update(deepcopy(row.get('submission_history', {})))
+    previous = {}
+    for key, row in before.items():
+        belongs = row.get('group_being_scored') == group or (
+            row.get('response_type') == 'Individual' and not row.get('group_being_scored')
+            and row.get('student_being_reviewed') in previous_members)
+        if belongs:
+            previous[key] = {k: deepcopy(v) for k, v in row.items() if k != 'submission_history'}
+    if not history and previous:
+        # Preserve the last pre-audit state, including legacy duplicates, without
+        # pretending its migration time was the original submission time.
+        history['baseline'] = {'kind': 'pre_history_snapshot',
+                               'preserved_at_ms': {'.sv': 'timestamp'}, 'records': previous}
+    after = replace_records(before, group, members, payloads, candidates)
+    saved = {k: deepcopy(v) for k, v in after.items() if v.get('submission_id') == batch}
+    for row in saved.values():
+        row['received_at_ms'] = {'.sv': 'timestamp'}
+    # Store the server receipt on each latest row and on its immutable batch.
+    for key in saved:
+        after[key]['received_at_ms'] = {'.sv': 'timestamp'}
+    history[batch] = {'kind': 'submission', 'submitted_at_ms': stamp,
+                      'received_at_ms': {'.sv': 'timestamp'},
+                      'evaluator_email': actor.get('email', ''), 'evaluator_role': actor['role'],
+                      'records': saved}
+    group_row = next(v for v in after.values() if v.get('response_type') == 'Group'
+                     and v.get('group_being_scored') == group)
+    group_row['submission_history'] = history
+    return after

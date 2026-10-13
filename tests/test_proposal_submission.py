@@ -78,3 +78,40 @@ def test_key_generation_is_push_id_compatible_and_unique():
         decoded = 0
         for char in key[:8]: decoded = decoded * 64 + alphabet.index(char)
         assert decoded == stamp and len(key) == 20
+
+
+def test_history_preserves_all_revisions_without_counting_them_as_latest():
+    actor=dict(FACULTY['teacher@mst.edu'],role='faculty',email='teacher@mst.edu')
+    g,i=payloads();r=Ref()
+    s.save_evaluation(r,actor,'301','301A',GROUPS,g,i)
+    first=deepcopy(r.data)
+    for score in (8,9):
+        g['technical_content_score']=score
+        s.save_evaluation(r,actor,'301','301A',GROUPS,g,i)
+    assert len(r.data)==3
+    group=next(v for v in r.data.values() if v['response_type']=='Group')
+    assert group['technical_content_score']==9
+    history=group['submission_history']
+    assert len(history)==3
+    archived_scores=[]
+    for event in history.values():
+        assert event['received_at_ms']=={'.sv':'timestamp'}
+        assert isinstance(event['submitted_at_ms'],int)
+        assert len(event['records'])==3
+        for row in event['records'].values():
+            assert 'submission_history' not in row  # no recursively growing snapshots
+        archived_scores.append(next(v['technical_content_score'] for v in event['records'].values() if v['response_type']=='Group'))
+    assert sorted(archived_scores)==[7,8,9]
+    old_history=next(v for v in first.values() if v['response_type']=='Group')['submission_history']
+    assert all(history[k]==v for k,v in old_history.items())
+
+
+def test_history_keeps_preexisting_records_and_removed_presenters():
+    actor=dict(FACULTY['teacher@mst.edu'],role='faculty');g,i=payloads();r=Ref()
+    old={'oldgroup':{'response_type':'Group','group_being_scored':'301A','student_being_reviewed':['Old Presenter']},
+         'oldperson':{'response_type':'Individual','student_being_reviewed':'Old Presenter'}}
+    r.data=deepcopy(old)
+    s.save_evaluation(r,actor,'301','301A',GROUPS,g,i)
+    group=next(v for v in r.data.values() if v['response_type']=='Group')
+    assert group['submission_history']['baseline']['records']==old
+    assert len(r.data)==3
