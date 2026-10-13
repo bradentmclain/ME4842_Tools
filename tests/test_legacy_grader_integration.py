@@ -32,8 +32,10 @@ def test_actual_grader_cohort_formula_and_repeat_calls():
     fn, _ = method()
     grader = SimpleNamespace()
     first = fn(grader)
-    # 85% individual * 25 points + 90% group * 10 points.
-    assert first['Presenter'][0] == pytest.approx(30.25)
+    # 85% individual * 20 points + 90% group * 15 points.
+    assert first['Presenter'][0] == pytest.approx(30.5)
+    assert 'Individual: 17.00/20' in first['Presenter'][1]
+    assert 'Group: 13.50/15' in first['Presenter'][1]
     assert fn(grader) == first
 
 

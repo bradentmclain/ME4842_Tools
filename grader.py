@@ -248,12 +248,11 @@ class Grader:
             team = report['groups'][group]
             if individual is None or individual['percent'] is None or team['percent'] is None:
                 raise ValueError(f'Grade held for {student}: missing individual scores or evaluator cohort.')
-            # Preserve this legacy grader's point allocation. The newer v3 rubric
-            # is a separate policy and requires an explicit migration.
-            ind_points = individual['percent'] * .25
-            group_points = team['percent'] * .10
+            # Corrected course allocation; use the shared preview calculation.
+            ind_points = report['students'][student]['individual_points']
+            group_points = report['students'][student]['group_points']
             lines = ['Faculty/GTA average: 75%; student average: 25%.',
-                     f'Individual: {ind_points:.2f}/25', f'Group: {group_points:.2f}/10']
+                     f'Individual: {ind_points:.2f}/20', f'Group: {group_points:.2f}/15']
             for label, component in [('Individual', individual), ('Group', team)]:
                 for criterion, detail in component['criteria'].items():
                     lines.append(f"{label} {criterion}: {detail['percent']:.2f}% "

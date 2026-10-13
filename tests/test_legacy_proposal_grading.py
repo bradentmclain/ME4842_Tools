@@ -72,3 +72,24 @@ def test_aliases_are_one_faculty_identity():
         ],
     }
     assert roster_roles(roster) == {"Zachary Boeringa": "faculty"}
+
+
+def test_corrected_twenty_fifteen_allocation_and_missing_individual_hold():
+    rows = [
+        row("s", 6, "1"),
+        row("ta", 10, "2"),
+        row("s", "Substandard", "3", "Individual"),
+        row("ta", "Excellent", "4", "Individual"),
+    ]
+    report = grade_legacy(rows, {"s": "student", "ta": "faculty"})
+    assert report["point_allocation"] == {"individual": 20, "group": 15, "total": 35}
+    assert report["students"]["Presenter"] == {
+        "group": "301A",
+        "individual_points": 17,
+        "group_points": 13.5,
+        "total_points": 30.5,
+        "held": False,
+    }
+    held = grade_legacy(rows[:2], {"s": "student", "ta": "faculty"})
+    assert held["students"]["Presenter"]["held"]
+    assert held["students"]["Presenter"]["total_points"] is None

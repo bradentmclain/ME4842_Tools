@@ -1,7 +1,7 @@
 """Read-only cohort grading for the deployed legacy presentation rubric.
 
-No score/rubric migration: legacy criteria, rating scale and point allocations
-remain unchanged. The faculty cohort is 75% and the student cohort is 25%.
+Legacy criteria and rating scale are retained. Corrected allocation: 20 individual
+plus 15 group points. The faculty cohort is 75% and the student cohort is 25%.
 """
 
 from collections import defaultdict
@@ -82,7 +82,7 @@ def grade_legacy(records, roles):
                     raise ValueError(f"Ambiguous group membership: {member}")
                 memberships[member] = target
     result = {
-        "policy": "legacy-cohort-75-25-v1",
+        "policy": "legacy-cohort-75-25-20i-15g-v2",
         "latest_records": len(latest),
         "groups": {},
         "individuals": {},
@@ -134,4 +134,23 @@ def grade_legacy(records, roles):
         }
         result["groups" if kind == "Group" else "individuals"][target] = component
     result["memberships"] = memberships
+    result["point_allocation"] = {"individual": 20, "group": 15, "total": 35}
+    result["students"] = {}
+    for student, group in sorted(memberships.items()):
+        individual = result["individuals"].get(student)
+        team = result["groups"][group]
+        held = individual is None or individual["percent"] is None or team["percent"] is None
+        ind_points = (
+            None
+            if individual is None or individual["percent"] is None
+            else individual["percent"] * 20 / 100
+        )
+        group_points = None if team["percent"] is None else team["percent"] * 15 / 100
+        result["students"][student] = {
+            "group": group,
+            "individual_points": ind_points,
+            "group_points": group_points,
+            "total_points": None if held else ind_points + group_points,
+            "held": held,
+        }
     return result
